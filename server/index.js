@@ -23,10 +23,12 @@ connection.once('open', ()=>{
 const agentsRouter = require('./routes/agents');
 const ordersRouter = require('./routes/orders');
 const resellersRouter = require('./routes/resellers');
+const pickupsRouter = require('./routes/pickups')
 
 app.use('/agents',agentsRouter);
 app.use('/orders',ordersRouter);
 app.use('/resellers',resellersRouter);
+app.use('/pickups',pickupsRouter);
 
 
 

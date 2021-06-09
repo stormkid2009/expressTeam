@@ -9,10 +9,12 @@ export default class Agent extends Component {
         this.state = {
             name : '',
             phone : '',
-            status : ""
+            agentCode: '',
+            status : ''
         }
         this.handleName = this.handleName.bind(this);
         this.handlePhone = this.handlePhone.bind(this);
+        this.handleAgentCode = this.handleAgentCode.bind(this);
         this.handleStatus = this.handleStatus.bind(this);
     }
     
@@ -27,6 +29,10 @@ export default class Agent extends Component {
         
     }
 
+    handleAgentCode =(e)=>{
+        this.setState({agentCode:e.target.value})
+    }
+
 
     handleStatus =(e)=>{
         this.setState({status:e.target.value});
@@ -39,6 +45,7 @@ export default class Agent extends Component {
         const agent = {
             name:this.state.name,
             phone:this.state.phone,
+            agentCode:this.state.agentCode,
             status:this.state.status,
             
         }
@@ -64,6 +71,13 @@ export default class Agent extends Component {
                         <input type="text" onChange={this.handlePhone} value={this.state.phone}
                         className="form-control"  />
                     </div>
+
+                    <div className="form-group">
+                        <label>Agent Code ..</label>
+                        <input type="text" onChange={this.handleAgentCode} value={this.state.phone}
+                        className="form-control"  />
+                    </div>
+
                     
                     <div className="form-group">
                         <label>Status of Agent</label>

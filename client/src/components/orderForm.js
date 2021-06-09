@@ -7,7 +7,7 @@ export default class Order extends Component {
     constructor(props){
         super(props);
         this.state = {
-            resellerID:'',
+            resellerCode:'',
             item:'',
             itemFormat : '',
             recipientName:'',
@@ -15,15 +15,15 @@ export default class Order extends Component {
             recipientPhone:'',
             totalCost:0,
             paymentFormat:'',
-            agentID:'express default',
+            agentCode:'default',
             agentCommission:0,
             expressFee:0,
-            date:new Date(),
+            date: new Date(),
             duration:0,
-            status:"unknown"
+            status:"pending"
             
         }
-        this.handleResellerID = this.handleResellerID.bind(this);
+        this.handleResellerCode = this.handleResellerCode.bind(this);
         this.handleItem = this.handleItem.bind(this);
         this.handleItemFormat = this.handleItemFormat.bind(this);
         this.handleRecipientName = this.handleRecipientName.bind(this);
@@ -31,7 +31,7 @@ export default class Order extends Component {
         this.handleRecipientPhone = this.handleRecipientPhone.bind(this);
         this.handleTotalCost = this.handleTotalCost.bind(this);
         this.handlePaymentFormat = this.handlePaymentFormat.bind(this);
-        this.handleAgentID = this.handleAgentID.bind(this);
+        this.handleAgentCode = this.handleAgentCode.bind(this);
         this.handleAgentCommission = this.handleAgentCommission.bind(this);
         this.handleExpressFee = this.handleExpressFee.bind(this);
         this.handleDate = this.handleDate.bind(this);
@@ -40,8 +40,8 @@ export default class Order extends Component {
     }
     
 
-    handleResellerID=(e)=>{
-        this.setState({resellerID:e.target.value});
+    handleResellerCode=(e)=>{
+        this.setState({resellerCode:e.target.value});
         
     }
 
@@ -78,8 +78,8 @@ export default class Order extends Component {
         
     }
 
-    handleAgentID = (e) =>{
-        this.setState({agentID:e.target.value})
+    handleAgentCode = (e) =>{
+        this.setState({agentCode:e.target.value})
     }
 
     handleAgentCommission = (e) =>{
@@ -109,7 +109,7 @@ export default class Order extends Component {
     handleSubmit = () =>{
         
         const order = {
-            resellerID:this.state.resellerID,
+            resellerCode:this.state.resellerCode,
             item:this.state.item,
             itemFormat : this.state.itemFormat,
             recipientName:this.state.recipientName,
@@ -117,7 +117,7 @@ export default class Order extends Component {
             recipientPhone:this.state.recipientPhone,
             totalCost:this.state.totalCost,
             paymentFormat:this.state.paymentFormat,
-            agentID:this.state.agentID,
+            agentCode:this.state.agentCode,
             agentCommission:this.state.agentCommission,
             expressFee:this.state.expressFee,
             date:this.state.date,
@@ -130,43 +130,47 @@ export default class Order extends Component {
         window.location = '/';
     }
     render(){
-        const {resellerID,item,itemFormat,recipientName,recipientAddress,recipientPhone,
-        totalCost,paymentFormat,agentID,agentCommission,expressFee,date,duration,status} = this.state;
+        const {resellerCode,item,itemFormat,recipientName,recipientAddress,recipientPhone,
+        totalCost,paymentFormat,agentCode,agentCommission,expressFee,date,duration,status} = this.state;
         return (
             <div>
                 <h3>Create new Order....</h3>
                 <div>
-                    <div className="form-group">
-                        <label>Reseller ID</label>
-                        <input type="text" onChange={this.handleResellerID} value={resellerID}
-                        className="form-control" />
-                    </div>
+                    
                     
                     <div className="form-group">
-                        <label>Item ..</label>
+                        <div className="form-control">
+                        <label style={{padding:"10px"}}>Reseller Code</label>
+                        <input type="text" onChange={this.handleResellerCode} value={resellerCode}
+                        />
+                        <label style={{padding:"10px"}}>Item ..</label>
                         <input type="text" onChange={this.handleItem} value={item}
-                        className="form-control"  />
+                          />
+                        <label style={{padding:"10px"}}>item format</label>
+                        <input type="text" onChange={this.handleItemFormat} value={itemFormat}
+                          />
+                        </div>
+                        
+                    </div>
+                    
+                    
+                    <div className="form-group">
+                        <div className="form-control">
+                        <label style={{padding:"10px"}}>Recipient Name</label>
+                        <input type="text" onChange={this.handleRecipientName} value={recipientName}
+                         />
+                        <label style={{padding:"10px"}}>Recipient Adress</label>
+                        <input type="text" onChange={this.handleRecipientAddress} value={recipientAddress}
+                         />
+                        <label style={{padding:"10px"}}>Recipient Phone</label>
+                        <input type="text" onChange={this.handleRecipientPhone} value={recipientPhone}
+                        />
+                        </div>
+                        
                     </div>
                     
                     <div className="form-group">
-                        <label>item format</label>
-                        <input type="text" onChange={this.handleItemFormat} value={itemFormat}
-                        className="form-control"  />
-                    </div>
-                    <div className="form-group">
-                        <label>Recipient Name</label>
-                        <input type="text" onChange={this.handleRecipientName} value={recipientName}
-                        className="form-control" />
-                    </div>
-                    <div className="form-group">
-                        <label>Recipient Adress</label>
-                        <input type="text" onChange={this.handleRecipientAddress} value={recipientAddress}
-                        className="form-control" />
-                    </div>
-                    <div className="form-group">
-                        <label>Recipient Phone</label>
-                        <input type="text" onChange={this.handleRecipientPhone} value={recipientPhone}
-                        className="form-control" />
+                        
                     </div>
                     <div className="form-group">
                         <label>Total cost</label>
@@ -179,12 +183,12 @@ export default class Order extends Component {
                         className="form-control" />
                     </div>
                     <div className="form-group">
-                        <label>Agent ID</label>
-                        <input type="text" onChange={this.handleAgentID} value={agentID}
+                        <label>Agent Code (appear in code only)</label>
+                        <input type="text" onChange={this.handleAgentCode} value={agentCode}
                         className="form-control" />
                     </div>
                     <div className="form-group">
-                        <label>Agent Commission</label>
+                        <label>Agent Commission(remove this!!)</label>
                         <input type="text" onChange={this.handleAgentCommission} value={agentCommission}
                         className="form-control" />
                     </div>
@@ -196,7 +200,9 @@ export default class Order extends Component {
                     <div className="form-group">
                         <label>Date of Order</label>
                         <div>
-                            <DatePicker selected={date} onChange={this.handleDate}/>
+                            <DatePicker selected={date} onChange={this.handleDate}
+                            dateFormat="dd/MM/yyyy" 
+                            isClearable />
                         </div>
                     </div>
                     <div className="form-group">
@@ -205,7 +211,7 @@ export default class Order extends Component {
                         className="form-control" />
                     </div>
                     <div className="form-group">
-                        <label>Status</label>
+                        <label>Status (appear code only)</label>
                         <input type="text" onChange={this.handleStatus} value={status}
                         className="form-control" />
                     </div>

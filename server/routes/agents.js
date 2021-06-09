@@ -13,6 +13,7 @@ router.route('/add').post((req,res)=>{
     
     const name = req.body.name;
     const phone = req.body.phone;
+    const agentCode = req.body.agentCode;
     const status = req.body.status;
 
     //fill in our model 
@@ -20,6 +21,7 @@ router.route('/add').post((req,res)=>{
         
         name,
         phone,
+        agentCode,
         status
         
     })

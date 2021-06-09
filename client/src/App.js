@@ -11,6 +11,7 @@ import AgentsList from './components/agentsList';
 import Reseller from './components/resellerForm';
 import ResellersList from './components/resellersList';
 import Update from './components/update';
+import PickUp from './components/pickupForm';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                <Route path="/reseller" component={Reseller} />
                <Route path="/resellersList" component={ResellersList} />
                <Route path="/update" component={Update} />
+               <Route path="/pickup" component={PickUp} />
                <Route  path="/" exact component={Home}/>
            </div>
         </Router>

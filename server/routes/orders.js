@@ -62,4 +62,20 @@ router.route('/:id').delete((req,res) => {
     .catch(err => res.status(400).json('Error :' + err))
 });
 
+//setup route to update pickup :
+router.route('/update/:id').post((req,res) => {
+    Order.findById(req.params.id)
+    .then(order => {
+        order.status = req.body.status; //assign new value to status
+        order.agentCode = req.body.agentCode; //assign new value to agentCode
+        
+        
+        //save order with updated value
+        order.save()
+        .then(()=> res.json("order status has been updated successfully !"))
+        .catch(err => res.status(400).json('Error :' + err))
+    })
+    .catch(err => res.status(400).json('Error :' + err))
+});
+
 module.exports = router;

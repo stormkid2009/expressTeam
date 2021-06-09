@@ -31,6 +31,9 @@ function Navbar() {
                     <li className="nav-item ">
                     <Link to="/update" className="nav-link">update Request</Link>
                     </li>
+                    <li className="nav-item ">
+                    <Link to="/pickup" className="nav-link">set new pickup</Link>
+                    </li>
                 </ul>
             </div>
         </nav>

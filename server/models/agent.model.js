@@ -5,6 +5,7 @@ const agentSchema = new Schema({
     
     name:{type: String, required: true},
     phone:{type:String, required:true},
+    agentCode:{type:String, required:true},
     status:{type:String ,required: true}
 },{
     timestamps: true,

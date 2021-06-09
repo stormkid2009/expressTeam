@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 const orderSchema = new Schema({
-    resellerID:{type: String, required: true},
+    resellerCode:{type: String, required: true},
     item :{type: String, required: true},
     itemFormat:{type:String, required:true},
     recipientName:{type: String, required: true},
@@ -10,7 +10,7 @@ const orderSchema = new Schema({
     recipientPhone:{type:String,required:true},
     totalCost:{type: Number, required: true},
     paymentFormat:{type:String, required:true},
-    agentID:{type:String,required:true},
+    agentCode:{type:String,required:true},
     agentCommission:{type: Number, required: true},
     expressFee:{type: Number, required: true},
     date:{type: Date, required: true},
