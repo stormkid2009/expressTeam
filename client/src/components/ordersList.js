@@ -1,41 +1,62 @@
 import React,{Component} from 'react';
 import axios from 'axios';
+import Order from './order';
 
-function Order(props) {
-    return (
-        <tr>
-        <td>{props.order._id}</td>
-        <td>{props.order.item}</td>
-        <td>{props.order.itemFormat}</td>
-        <td>{props.order.recipientName}</td>
-        <td>{props.order.recipientAddress}</td>
-        <td>{props.order.recipientPhone}</td>
-        <td>{props.order.totalCost}</td>
-        <td>{props.order.paymentFormat}</td>
-        <td>{props.order.agentID}</td>
-        <td>{props.order.agentCommission}</td>
-        <td>{props.order.expressFee}</td>
-        <td>{props.order.date.substring(0,10)}</td>
-        <td>{props.order.duration}</td>
-    </tr>
-    )
-}
 
 
 export default class OrdersList extends Component{
     constructor(props){
         super(props);
         this.state = {
-            orders:[]
+            orders:[],
+            list:"",
+            id:"",
+            status:""
         }
+        this.handleList = this.handleList.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleID = this.handleID.bind(this);
     }
     componentDidMount() {
         axios.get("http://localhost:5000/orders/")
         .then(res => this.setState({orders:res.data}))
         .catch(err => console.log(err))
     }
+
+    handleList =(e)=>{
+        this.setState({list:e.target.value});
+    }
+
+    handleChange =(e)=>{
+        this.setState({status:e.target.value});
+    }
+
+    handleUpdate =()=>{
+        //axios request to update status
+        const order = {
+            status:this.state.status,
+            agentCode:"default"
+        }
+        
+        axios.post("http://localhost:5000/orders/update/" + this.state.id,order)
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err))
+        window.location = "/";
+    }
+    handleDelete =()=>{
+        //axios request to delete order
+        axios.delete("http://localhost:5000/orders/" + this.state.id)
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err))
+        window.location = "/";
+    }
+    handleID =(e)=>{
+        this.setState({id:e.target.value});
+    }
     doneList () {
-        return this.state.orders.filter(currentOrder => currentOrder.status === "done").map(currentOrder =>{
+        return this.state.orders.filter(currentOrder => currentOrder.status === "delivered").map(currentOrder =>{
             return <Order order={currentOrder} />
         })
     }
@@ -45,85 +66,92 @@ export default class OrdersList extends Component{
         })
     }
 
-    unknownList () {
-        return this.state.orders.filter(currentOrder => currentOrder.status === "unknown").map(currentOrder =>{
+    rejectedList () {
+        return this.state.orders.filter(currentOrder => currentOrder.status === "rejected").map(currentOrder =>{
+            return <Order order={currentOrder} />
+        })
+    }
+
+    pendingList () {
+        return this.state.orders.filter(currentOrder => currentOrder.status === "pending").map(currentOrder =>{
+            return <Order order={currentOrder} />
+        })
+    }
+
+    onprogressList () {
+        return this.state.orders.filter(currentOrder => currentOrder.status === "onprogress").map(currentOrder =>{
             return <Order order={currentOrder} />
         })
     }
     render(){
+        const {list,id} = this.state;
+        
+            
         return (
             <div>
-                <h3>List of delivered orders</h3>
-                <div style={{border:"2px solid black" , margin:"30px 10px" ,padding:"30px"}}>
+                <select className ="form-select" aria-label="Default select example"
+                onChange={this.handleList}>
+                    <option selected>choose via order status</option>
+                    <option value="pending">Pending</option>
+                    <option value="onprogress">onProgress</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="rejected">Rejected</option>
+                    <option value="refused">Refused</option>
+                </select>
+                
+                <div >
                     
-                    <table className="table">
-                        <tr className="thead-light">
-                        <th>ID</th>
+                    <table className="table table-hover table-dark table-bordered " >
+                        <thead className="table-secondary">
+                        <tr >
+                        
                             <th>Item</th>
-                            <th>Format</th>
-                            <th>To..</th>
-                            <th>Address</th>
-                            <th>Phone</th>
-                            <th>Total</th>
-                            <th>payment</th>
-                            <th>agentID</th>
-                            <th>agentCom</th>
+                            <th>Res Code</th>
+                            <th>Client</th>
+                            <th>..Address</th>
+                            <th>..Phone</th>
+                            <th>Total cost</th>
+                            <th>Agent Code</th>
+                            <th>..Comission</th>
                             <th>Exp-Fee</th>
                             <th>Date</th>
-                            <th>Duration</th>
+                            <th>Notes..</th>
+                            <th>order ID</th>
                         </tr>
-                        <tbody>
-                            {this.doneList()}
+                        </thead>
+                        <tbody >
+                            {list === "pending"? this.pendingList():list === "onprogress" ? this.onprogressList():
+                            list === "delivered" ? this.doneList():list === "rejected" ? this.rejectedList():
+                            list === "refused" ? this.refusedList():<h4>nothing to display</h4>}
                         </tbody>
                         </table>
                 </div>
-                <h3>List of Refused orders</h3>
-                <div style={{border:"2px solid black" , margin:"30px 10px" ,padding:"30px"}}>
+                <h6 style={{color:"blue"}}>Update an Order.......</h6>
+                <div style={{padding:"10px",borderStyle:"inset"}}>
+                    <div style={{padding:"10px"}}>
+                        <label style={{padding:"10px"}}> Enter Order ID</label>
+                        <input value={id} onChange={this.handleID}/>
+                    </div>
                     
-                    <table className="table">
-                        <tr className="thead-light">
-                        <th>ID</th>
-                            <th>Item</th>
-                            <th>Format</th>
-                            <th>To..</th>
-                            <th>Address</th>
-                            <th>Phone</th>
-                            <th>Total</th>
-                            <th>payment</th>
-                            <th>agentID</th>
-                            <th>agentCom</th>
-                            <th>Exp-Fee</th>
-                            <th>Date</th>
-                            <th>Duration</th>    
-                        </tr>
-                        <tbody>
-                            {this.refusedList()}
-                        </tbody>
-                        </table>
+                    
+                    <div style={{padding:"10px"}}>
+                        
+                        <select className ="form-select" aria-label="Default select example"
+                        onChange={this.handleChange}>
+                            <option selected>Change order Status</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="rejected">Rejected</option>
+                            <option value="refused">Refused</option>
+                        </select>
+                    </div>
+                    <div style={{padding:"10px" ,display:'flex',justifyContent:'space-evenly'}}>
+                        <button className="btn btn-outline-primary" onClick={this.handleUpdate}>Update Status</button>
+                        <button className="btn btn-outline-danger" onClick={this.handleDelete}>Delete order</button>
+                    </div>
+                    
+
                 </div>
-                <h3>List of Unkown Orders</h3>
-                <div style={{border:"2px solid black" , margin:"10px 10px" ,padding:"10px"}}>
-                <table className="table">
-                        <tr className="thead-light">
-                            <th>ID</th>
-                            <th>Item</th>
-                            <th>Format</th>
-                            <th>To..</th>
-                            <th>Address</th>
-                            <th>Phone</th>
-                            <th>Total</th>
-                            <th>payment</th>
-                            <th>agentID</th>
-                            <th>agentCom</th>
-                            <th>Exp-Fee</th>
-                            <th>Date</th>
-                            <th>Duration</th>
-                        </tr>
-                        <tbody>
-                            {this.unknownList()}
-                        </tbody>
-                        </table>
-                </div>
+                
             </div>
         )
     }

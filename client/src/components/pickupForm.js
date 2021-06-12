@@ -75,9 +75,9 @@ export default class PickUp extends Component {
         return (
             <div>
                 <h2>list of pending orders</h2>
-                <label>Date</label><select></select>
-                <label>Res Code</label><select></select>
-                <label>Status</label><select></select>
+                <label style={{padding:"15px"}}>Date</label><select></select>
+                <label style={{padding:"15px"}}>Res Code</label><select></select>
+                <label style={{padding:"15px"}}>Status</label><select></select>
                 <div> pending orders will appear here</div>
                 <div>
                     <div className="form-group">

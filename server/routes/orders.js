@@ -10,37 +10,33 @@ router.route('/').get((req,res)=>{
 
 router.route('/add').post((req,res)=>{
     //assign request body to variables
-    const resellerID = req.body.resellerID;
+    const resellerCode = req.body.resellerCode;
     const item = req.body.item;
-    const itemFormat = req.body.itemFormat;
     const recipientName = req.body.recipientName;
     const recipientAddress = req.body.recipientAddress;
     const recipientPhone = req.body.recipientPhone;
     const totalCost = Number(req.body.totalCost);
-    const paymentFormat = req.body.paymentFormat;
-    const agentID = req.body.agentID;
+    const agentCode = req.body.agentCode;
     const agentCommission = Number(req.body.agentCommission);
     const expressFee = Number(req.body.expressFee);
     const date = Date.parse(req.body.date);
-    const duration = Number(req.body.duration);
     const status = req.body.status;
+    const notes = req.body.notes;
 
     //fill in our model 
     const newOrder = new Order({
-        resellerID,
+        resellerCode,
         item ,
-        itemFormat,
         recipientName,
         recipientAddress,
         recipientPhone,
         totalCost,
-        paymentFormat,
-        agentID,
+        agentCode,
         agentCommission,
         expressFee,
         date,
-        duration,
-        status
+        status,
+        notes
     })
 
     newOrder.save()

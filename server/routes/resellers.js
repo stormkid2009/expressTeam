@@ -13,12 +13,14 @@ router.route('/add').post((req,res)=>{
     const name = req.body.name;
     const address = req.body.address;
     const phone = req.body.phone;
+    const resellerCode = req.body.resellerCode;
 
     //fill in our model 
     const newReseller = new Reseller({
         name,
         address,
-        phone
+        phone,
+        resellerCode
         
     })
 

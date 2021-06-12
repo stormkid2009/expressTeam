@@ -5,7 +5,8 @@ const resellerSchema = new Schema({
     
     name:{type: String, required: true},
     address:{type:String ,required: true},
-    phone:{type:String ,required: true}
+    phone:{type:String ,required: true},
+    resellerCode:{type:String ,required: true}
 },{
     timestamps: true,
 });

@@ -1,13 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios';
+import Agent from './agent';
 
-const Agent = props =>(
-    <tr>
-        <td>{props.agent._id}</td>
-        <td>{props.agent.name}</td>
-        <td>{props.agent.phone}</td>
-    </tr>
-)
 
 export default class AgentsList extends Component {
     constructor(props){
@@ -34,14 +28,15 @@ export default class AgentsList extends Component {
     render(){
         return (
             <div>
-                <h3>List of delivered Orders</h3>
+                <h3>List of busy agents</h3>
                     <div style={{border:"2px solid black" , margin:"30px 10px" ,padding:"30px"}}>
                         
                         <table className="table">
                             <tr className="thead-light">
-                                <th>Request ID</th>
+                                <th>Agent code</th>
                                 <th>Agent Name</th>
                                 <th>Agent Phone Number</th>
+                                <th>Agent status</th>
                                 
                             </tr>
                             <tbody>
@@ -49,14 +44,15 @@ export default class AgentsList extends Component {
                             </tbody>
                             </table>
                     </div>
-                    <h3>List of undelivered Orders</h3>
+                    <h3>List of free agents</h3>
                     <div style={{border:"2px solid black" , margin:"30px 10px" ,padding:"30px"}}>
                         
                         <table className="table">
                             <tr className="thead-light">
-                                <th>Agent ID</th>
+                                <th>Agent code</th>
                                 <th>Agent Name</th>
                                 <th>Agent Phone Number</th>
+                                <th>Agent status</th>
                                 
                                 
                             </tr>
