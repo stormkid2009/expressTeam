@@ -27,6 +27,28 @@ router.route('/add').post((req,res)=>{
     newReseller.save()
     .then(()=> res.json("new Reseller has been added successfully!"))
     .catch(err => res.status(400).json("Error : " + err))
-})
+});
+
+router.route('/:id').delete((req,res)=>{
+    Reseller.findByIdAndDelete(req.params.id)
+    .then(() => res.json("Reseller has been removed successfuly"))
+    .catch(err => res.status(400).json("Error: " + err))
+});
+
+router.route('/update/:id').post((req,res)=>{
+    Reseller.findById(req.params.id)
+    .then(reseller =>{
+        reseller.name = req.body.name;
+        reseller.phone = req.body.phone;
+        reseller.address = req.body.address;
+        reseller.resellerCode = req.body.resellerCode;
+
+
+        reseller.save()
+        .then(()=> res.json("reseller info has been modifyed! "))
+        .catch(err => res.status(400).json("Error: " + err))
+    })
+    .catch(err => res.status(400).json("Error: " + err))
+});
 
 module.exports = router;

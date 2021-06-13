@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import Order from './order';
 
 export default class PickUp extends Component {
     //get all pending orders here so we can charge what we want to this pickup
@@ -10,125 +12,168 @@ export default class PickUp extends Component {
         super(props);
         this.state = {
             date: new Date(),
-            time:'',
+            notes:'',
             agentCode:'',
             order1:'',
             order2:'',
             order3:'',
             order4:'',
             order5:'',
+            order6:'',
             orders:[]
+            
         }
         this.handleDate = this.handleDate.bind(this);
-        this.handleTime = this.handleTime.bind(this);
+        this.handleNotes = this.handleNotes.bind(this);
         this.handleAgentCode = this.handleAgentCode.bind(this);
         this.handleOrder1 = this.handleOrder1.bind(this);
         this.handleOrder2 = this.handleOrder2.bind(this);
         this.handleOrder3 = this.handleOrder3.bind(this);
         this.handleOrder4 = this.handleOrder4.bind(this);
         this.handleOrder5 = this.handleOrder5.bind(this);
+        this.handleOrder6 = this.handleOrder6.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleLog = this.handleLog.bind(this);
-    }
-    handleSubmit(){
-        this.setState(state =>({orders:[...state.orders,this.state.order1,this.state.order2,this.state.order3,
-            this.state.order4,this.state.order5]}));
         
     }
-    handleLog(){
-        //we will doing foreach loop to change status with axios
-        this.state.orders.forEach(order => console.log(order));
+
+    componentDidMount() {
+        axios.get("http://localhost:5000/orders/")
+        .then(res => this.setState({orders:res.data}))
+        .catch(err => console.log(err))
     }
+
+    handleSubmit =()=>{
+        
+      //we will doing foreach loop to change status with axios
+      const {order1,order2,order3,order4,order5,order6}= this.state;
+      const list=[order1,order2,order3,order4,order5,order6];
+      list.forEach(code => console.log(code));
+        
+        
+    }
+
+    
+
     handleDate=(date)=>{
         this.setState({date:date});
         
     }
-    handleTime(e){
-        this.setState({time:e.target.value});
+
+    handleNotes =(e)=>{
+        this.setState({notes:e.target.value});
     }
-    handleAgentCode (e){
+
+    handleAgentCode =(e)=>{
         this.setState({agentCode:e.target.value});
     }
-    handleOrder1 (e){
-        this.setState({order1:e.target.value})
+
+    handleOrder1 =(e)=>{
+        this.setState({order1:e.target.value});
+        
         
     }
-    handleOrder2 (e){
+
+    handleOrder2 =(e)=>{
         this.setState({order2:e.target.value})
         
     }
-    handleOrder3 (e){
+
+    handleOrder3 =(e)=>{
         this.setState({order3:e.target.value})
         
     }
-    handleOrder4 (e){
+
+    handleOrder4 =(e)=>{
         this.setState({order4:e.target.value})
         
     }
-    handleOrder5 (e){
+
+    handleOrder5 =(e)=>{
         this.setState({order5:e.target.value})
         
     }
+
+    handleOrder6 =(e)=>{
+        this.setState({order6:e.target.value})
+        
+    }
+    pendingList =()=> {
+        return this.state.orders.filter(currentOrder => currentOrder.status === "pending").map(currentOrder =>{
+            return <Order order={currentOrder} />
+        })
+    }
     
     render() {
-        const {date,time,agentCode,order1,order2,order3,order4,order5} = this.state;
+        const {date,notes,agentCode,order1,order2,order3,order4,order5,order6} = this.state;
         return (
             <div>
-                <h2>list of pending orders</h2>
-                <label style={{padding:"15px"}}>Date</label><select></select>
-                <label style={{padding:"15px"}}>Res Code</label><select></select>
-                <label style={{padding:"15px"}}>Status</label><select></select>
-                <div> pending orders will appear here</div>
-                <div>
-                    <div className="form-group">
+                <h5 style={{color:"purple",textAlign:"center"}}>list of pending orders</h5>
+                <table className="table table-hover table-dark table-bordered " >
+                        <thead className="table-secondary">
+                        <tr >
+                        
+                            <th>Item</th>
+                            <th>Res Code</th>
+                            <th>Client</th>
+                            <th>..Address</th>
+                            <th>..Phone</th>
+                            <th>Total cost</th>
+                            <th>Agent Code</th>
+                            <th>..Comission</th>
+                            <th>Exp-Fee</th>
+                            <th>Date</th>
+                            <th>Notes..</th>
+                            <th>order ID</th>
+                        </tr>
+                        </thead>
+                        <tbody >
+                            {this.pendingList()}
+                        </tbody>
+                        </table>
+                
+                <div className="form-group">
+                    <div className="form-control" style={{
+                        display:'flex',justifyContent:'space-around'
+                    }}>
                         <label>Date</label>
-                        <div>
-                            <DatePicker selected={date} onChange={this.handleDate}/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label>Time</label>
-                        <input type="text" onChange={this.handleTime} value={time}
-                        className="form-control" />
-                    </div>
-                    <div className="form-group">
+                        <DatePicker selected={date} onChange={this.handleDate}/>
+                        <label>Notes</label>
+                        <input type="text" onChange={this.handleNotes} value={notes}/>
                         <label>Agent Code</label>
-                        <input type="text" onChange={this.handleAgentCode} value={agentCode}
-                        className="form-control" />
+                        <input type="text" onChange={this.handleAgentCode} value={agentCode}/>
                     </div>
-                    <div className="form-group">
-                        <label>Order 1</label>
-                        <input type="text" onChange={this.handleOrder1} value={order1}
-                        className="form-control" />
+                    
+                    
+                    <div className="form-control" style={{
+                        display:'flex',justifyContent:'space-around'
+                    }}>
+                        <label>Order1</label>
+                        <input type="text" onChange={this.handleOrder1} value={order1}/>
+                        <label>Order2</label>
+                        <input type="text" onChange={this.handleOrder2} value={order2}/>
+                        <label>Order3</label>
+                        <input type="text" onChange={this.handleOrder3} value={order3}/>
                     </div>
-                    <div className="form-group">
-                        <label>Order 2</label>
-                        <input type="text" onChange={this.handleOrder2} value={order2}
-                        className="form-control" />
+                    
+                    <div className="form-control" style={{
+                        display:'flex',justifyContent:'space-around'
+                    }}>
+                        <label>Order4</label>
+                        <input type="text" onChange={this.handleOrder4} value={order4}/>
+                        <label>Order5</label>
+                        <input type="text" onChange={this.handleOrder5} value={order5}/>
+                        <label>Order6</label>
+                        <input type="text" onChange={this.handleOrder6} value={order6}/>
                     </div>
-                    <div className="form-group">
-                        <label>Order 3</label>
-                        <input type="text" onChange={this.handleOrder3} value={order3}
-                        className="form-control" />
-                    </div>
-                    <div className="form-group">
-                        <label>Order 4</label>
-                        <input type="text" onChange={this.handleOrder4} value={order4}
-                        className="form-control" />
-                    </div>
-                    <div className="form-group">
-                        <label>Order 5</label>
-                        <input type="text" onChange={this.handleOrder5} value={order5}
-                        className="form-control" />
-                    </div>
-                    <div className="form-group">
+                    
+                    <div className="form-control" style={{
+                        display:'flex',justifyContent:'center'
+                    }}>
                         <button  className="btn btn-primary" 
                         onClick={this.handleSubmit}>Submit</button>
                     </div>
                 </div>
-                <div>
-                    <button onClick={this.handleLog}>log orders</button>
-                </div>
+                
             </div>
         )
     }

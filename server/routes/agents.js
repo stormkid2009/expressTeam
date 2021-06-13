@@ -29,6 +29,23 @@ router.route('/add').post((req,res)=>{
     newAgent.save()
     .then(()=> res.json("new agent has been added successfully!"))
     .catch(err => res.status(400).json("Error : " + err))
-})
+});
+
+router.route('/:id').delete((req,res)=>{
+    Agent.findByIdAndDelete(req.params.id)
+    .then(() => res.json("Agent has been removed successfuly"))
+    .catch(err => res.status(400).json("Error: " + err))
+});
+
+router.route('/update/:id').post((req,res)=>{
+    Agent.findById(req.params.id)
+    .then(agent=>{
+        agent.status = req.body.status;
+        agent.save()
+        .then(()=> res.json("agent status has been modifyed! "))
+        .catch(err => res.status(400).json("Error: " + err))
+    })
+    .catch(err => res.status(400).json("Error: " + err))
+});
 
 module.exports = router;

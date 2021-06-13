@@ -126,7 +126,7 @@ export default class OrdersList extends Component{
                         </tbody>
                         </table>
                 </div>
-                <h6 style={{color:"blue"}}>Update an Order.......</h6>
+                <h5 style={{textAlign:"center",color:"purple"}}>Update an Order</h5>
                 <div style={{padding:"10px",borderStyle:"inset"}}>
                     <div style={{padding:"10px"}}>
                         <label style={{padding:"10px"}}> Enter Order ID</label>

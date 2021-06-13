@@ -10,12 +10,12 @@ export default class Agent extends Component {
             name : '',
             phone : '',
             agentCode: '',
-            status : ''
+            status : 'free'
         }
         this.handleName = this.handleName.bind(this);
         this.handlePhone = this.handlePhone.bind(this);
         this.handleAgentCode = this.handleAgentCode.bind(this);
-        this.handleStatus = this.handleStatus.bind(this);
+        
     }
     
 
@@ -34,11 +34,7 @@ export default class Agent extends Component {
     }
 
 
-    handleStatus =(e)=>{
-        this.setState({status:e.target.value});
-        
-    }
-
+    
     
     handleSubmit = () =>{
         
@@ -74,16 +70,12 @@ export default class Agent extends Component {
 
                     <div className="form-group">
                         <label>Agent Code ..</label>
-                        <input type="text" onChange={this.handleAgentCode} value={this.state.phone}
+                        <input type="text" onChange={this.handleAgentCode} value={this.state.agentCode}
                         className="form-control"  />
                     </div>
 
                     
-                    <div className="form-group">
-                        <label>Status of Agent</label>
-                        <input type="text" onChange={this.handleStatus} value={this.state.status}
-                        className="form-control"  />
-                    </div>
+                    
                     
                     <div className="form-group">
                         <button  className="btn btn-primary"
