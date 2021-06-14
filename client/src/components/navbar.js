@@ -14,16 +14,16 @@ function Navbar() {
                     <Link to="/order" className="nav-link">New Order</Link>
                     </li>
                     <li className="nav-item ">
-                    <Link to="/ordersList" className="nav-link"> Orders List</Link>
+                    <Link to="/ordersList" className="nav-link"> Orders Panel</Link>
                     </li>
                     <li className="nav-item ">
-                    <Link to="/agent" className="nav-link">New Agent</Link>
+                    <Link to="/agent" className="nav-link">Agent Panel</Link>
                     </li>
                     <li className="nav-item ">
                     <Link to="/agentsList" className="nav-link">Agents List</Link>
                     </li>
                     <li className="nav-item ">
-                    <Link to="/reseller" className="nav-link">New  Reseller</Link>
+                    <Link to="/reseller" className="nav-link">Reseller Panel</Link>
                     </li>
                     <li className="nav-item ">
                     <Link to="/resellersList" className="nav-link">Resellers List</Link>
@@ -32,7 +32,7 @@ function Navbar() {
                     <Link to="/update" className="nav-link">update Request</Link>
                     </li>
                     <li className="nav-item ">
-                    <Link to="/pickup" className="nav-link">set new pickup</Link>
+                    <Link to="/pickup" className="nav-link">set pickup</Link>
                     </li>
                 </ul>
             </div>

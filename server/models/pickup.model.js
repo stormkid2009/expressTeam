@@ -4,13 +4,14 @@ const Schema = mongoose.Schema;
 const pickupSchema = new Schema({
     
     date:{type: Date, required: true},
-    time:{type:String, required:true},
-    agentCode:{type:String ,required: true},
-    item1:{type: String, required: true},
-    item2:{type: String, required: true},
-    item3:{type: String, required: true},
-    item4:{type: String, required: true},
-    item5:{type: String, required: true}
+    notes:{type:String},
+    agentID:{type:String ,required: true},
+    order1:{type:String},
+    order2:{type:String},
+    order3:{type:String},
+    order4:{type:String},
+    order5:{type:String},
+    order6:{type:String}
 },{
     timestamps: true,
 });

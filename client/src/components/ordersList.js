@@ -55,7 +55,7 @@ export default class OrdersList extends Component{
     handleID =(e)=>{
         this.setState({id:e.target.value});
     }
-    doneList () {
+    deliveredList () {
         return this.state.orders.filter(currentOrder => currentOrder.status === "delivered").map(currentOrder =>{
             return <Order order={currentOrder} />
         })
@@ -78,8 +78,8 @@ export default class OrdersList extends Component{
         })
     }
 
-    onprogressList () {
-        return this.state.orders.filter(currentOrder => currentOrder.status === "onprogress").map(currentOrder =>{
+    chargedList () {
+        return this.state.orders.filter(currentOrder => currentOrder.status === "charged").map(currentOrder =>{
             return <Order order={currentOrder} />
         })
     }
@@ -93,7 +93,7 @@ export default class OrdersList extends Component{
                 onChange={this.handleList}>
                     <option selected>choose via order status</option>
                     <option value="pending">Pending</option>
-                    <option value="onprogress">onProgress</option>
+                    <option value="charged">Charged</option>
                     <option value="delivered">Delivered</option>
                     <option value="rejected">Rejected</option>
                     <option value="refused">Refused</option>
@@ -120,8 +120,8 @@ export default class OrdersList extends Component{
                         </tr>
                         </thead>
                         <tbody >
-                            {list === "pending"? this.pendingList():list === "onprogress" ? this.onprogressList():
-                            list === "delivered" ? this.doneList():list === "rejected" ? this.rejectedList():
+                            {list === "pending"? this.pendingList():list === "charged" ? this.chargedList():
+                            list === "delivered" ? this.deliveredList():list === "rejected" ? this.rejectedList():
                             list === "refused" ? this.refusedList():<h4>nothing to display</h4>}
                         </tbody>
                         </table>

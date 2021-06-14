@@ -9,41 +9,55 @@ router.route('/').get((req,res)=>{
 })
 
 router.route('/add').post((req,res)=>{
-    //assign request body to variables
+    //assign pickup body to variables
     
     const date = Date.parse(req.body.date);
-    const time = req.body.time;
-    const agentCode = req.body.agentCode;
-    const item1 = req.body.item1;
-    const item2 = req.body.item2;
-    const item3 = req.body.item3;
-    const item4 = req.body.item4;
-    const item5 = req.body.item5;
+    const notes = req.body.notes;
+    const agentID = req.body.agentID;
+    const order1 = req.body.order1;
+    const order2 = req.body.order2;
+    const order3 = req.body.order3;
+    const order4 = req.body.order4;
+    const order5 = req.body.order5;
+    const order6 = req.body.order6;
 
     //fill in our model 
     const newPickup = new Pickup({
         
         date,
-        time,
-        agentCode,
-        item1,
-        item2,
-        item3,
-        item4,
-        item5
+        notes,
+        agentID,
+        order1,
+        order2,
+        order3,
+        order4,
+        order5,
+        order6
         
     })
 
     newPickup.save()
     .then(()=> res.json("new pickup has been added successfully!"))
     .catch(err => res.status(400).json("Error : " + err))
-})
+});
+
+//setup end point to delete pickup
+router.route('/:id').delete((req,res)=>{
+    Pickup.findByIdAndDelete(req.params.id)
+    .then(() => res.json("Pickup has been removed successfuly"))
+    .catch(err => res.status(400).json("Error: " + err))
+});
 
 //setup route to update pickup :
 router.route('/update/:id').post((req,res) => {
     Pickup.findById(req.params.id)
     .then(pickup => {
-        pickup.item3 = req.body.item3; //assign new value to item3 as example here
+        pickup.order1 = req.body.order1; //assign new value to item3 as example here
+        pickup.order2 = req.body.order2;
+        pickup.order3 = req.body.order3;
+        pickup.order4 = req.body.order4;
+        pickup.order5 = req.body.order5;
+        pickup.order6 = req.body.order6;
         //we will change this later for more flexiablity
         
         //save pickup with updated value

@@ -13,7 +13,7 @@ export default class PickUp extends Component {
         this.state = {
             date: new Date(),
             notes:'',
-            agentCode:'',
+            agentID:'',
             order1:'',
             order2:'',
             order3:'',
@@ -25,7 +25,7 @@ export default class PickUp extends Component {
         }
         this.handleDate = this.handleDate.bind(this);
         this.handleNotes = this.handleNotes.bind(this);
-        this.handleAgentCode = this.handleAgentCode.bind(this);
+        this.handleAgentID = this.handleAgentID.bind(this);
         this.handleOrder1 = this.handleOrder1.bind(this);
         this.handleOrder2 = this.handleOrder2.bind(this);
         this.handleOrder3 = this.handleOrder3.bind(this);
@@ -33,6 +33,7 @@ export default class PickUp extends Component {
         this.handleOrder5 = this.handleOrder5.bind(this);
         this.handleOrder6 = this.handleOrder6.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.chargeOrders = this.chargeOrders.bind(this);
         
     }
 
@@ -42,17 +43,48 @@ export default class PickUp extends Component {
         .catch(err => console.log(err))
     }
 
-    handleSubmit =()=>{
+    chargeOrders =()=>{
         
       //we will doing foreach loop to change status with axios
-      const {order1,order2,order3,order4,order5,order6}= this.state;
+      const {order1,order2,order3,order4,order5,order6,agentID}= this.state;
       const list=[order1,order2,order3,order4,order5,order6];
-      list.forEach(code => console.log(code));
+      for(let i=0;i<list.length;i++){
+          if(list[i]===""){
+              console.log("invalid id")
+          }else{
+            axios.post('http://localhost:5000/orders/update/' + list[i],{status:"charged" , agentID:agentID})
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err))
+          }
         
+      }
+        /*axios.post('http://localhost:5000/agents/update/' + agentID,{status:"hired"})
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err))*/
+         
         
+      
+      
     }
 
-    
+    handleSubmit =()=>{
+        
+        const pickup = {
+            date: this.state.date,
+            notes: this.state.notes,
+            agentID: this.state.agentID,
+            order1:  this.state.order1,
+            order2:  this.state.order2,
+            order3:  this.state.order3,
+            order4:  this.state.order4,
+            order5:  this.state.order5,
+            order6:  this.state.order6
+        
+    }
+      axios.post('http://localhost:5000/pickups/add' , pickup)
+      .then(res => console.log(res.data))  
+        window.location='/';
+    }
 
     handleDate=(date)=>{
         this.setState({date:date});
@@ -63,8 +95,8 @@ export default class PickUp extends Component {
         this.setState({notes:e.target.value});
     }
 
-    handleAgentCode =(e)=>{
-        this.setState({agentCode:e.target.value});
+    handleAgentID =(e)=>{
+        this.setState({agentID:e.target.value});
     }
 
     handleOrder1 =(e)=>{
@@ -104,7 +136,7 @@ export default class PickUp extends Component {
     }
     
     render() {
-        const {date,notes,agentCode,order1,order2,order3,order4,order5,order6} = this.state;
+        const {date,notes,agentID,order1,order2,order3,order4,order5,order6} = this.state;
         return (
             <div>
                 <h5 style={{color:"purple",textAlign:"center"}}>list of pending orders</h5>
@@ -140,7 +172,7 @@ export default class PickUp extends Component {
                         <label>Notes</label>
                         <input type="text" onChange={this.handleNotes} value={notes}/>
                         <label>Agent Code</label>
-                        <input type="text" onChange={this.handleAgentCode} value={agentCode}/>
+                        <input type="text" onChange={this.handleAgentID} value={agentID}/>
                     </div>
                     
                     
@@ -169,6 +201,8 @@ export default class PickUp extends Component {
                     <div className="form-control" style={{
                         display:'flex',justifyContent:'center'
                     }}>
+                        <button className="btn btn-secondary" 
+                        onClick={this.chargeOrders}> charge orders</button>
                         <button  className="btn btn-primary" 
                         onClick={this.handleSubmit}>Submit</button>
                     </div>

@@ -10,18 +10,16 @@ router.route('/').get((req,res)=>{
 
 router.route('/add').post((req,res)=>{
     //assign request body to variables
-    
+    const _id = req.body._id;
     const name = req.body.name;
     const phone = req.body.phone;
-    const agentCode = req.body.agentCode;
     const status = req.body.status;
 
     //fill in our model 
     const newAgent = new Agent({
-        
+        _id,
         name,
         phone,
-        agentCode,
         status
         
     })

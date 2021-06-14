@@ -8,7 +8,7 @@ const orderSchema = new Schema({
     recipientAddress:{type: String, required: true},
     recipientPhone:{type:String,required:true},
     totalCost:{type: Number, required: true},
-    agentCode:{type:String,required:true},
+    agentID:{type:String,required:true},
     agentCommission:{type: Number, required: true},
     expressFee:{type: Number, required: true},
     date:{type: Date, required: true},

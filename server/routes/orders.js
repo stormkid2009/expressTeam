@@ -16,7 +16,7 @@ router.route('/add').post((req,res)=>{
     const recipientAddress = req.body.recipientAddress;
     const recipientPhone = req.body.recipientPhone;
     const totalCost = Number(req.body.totalCost);
-    const agentCode = req.body.agentCode;
+    const agentID = req.body.agentID;
     const agentCommission = Number(req.body.agentCommission);
     const expressFee = Number(req.body.expressFee);
     const date = Date.parse(req.body.date);
@@ -31,7 +31,7 @@ router.route('/add').post((req,res)=>{
         recipientAddress,
         recipientPhone,
         totalCost,
-        agentCode,
+        agentID,
         agentCommission,
         expressFee,
         date,
@@ -63,7 +63,7 @@ router.route('/update/:id').post((req,res) => {
     Order.findById(req.params.id)
     .then(order => {
         order.status = req.body.status; //assign new value to status
-        order.agentCode = req.body.agentCode; //assign new value to agentCode
+        order.agentID = req.body.agentID; //assign new value to agent ID
         
         
         //save order with updated value
