@@ -1,8 +1,16 @@
 
 import React, {Component} from 'react';
 import axios from 'axios';
+import Order from './order';
 
-
+const center = {
+    display:'flex',
+    justifyContent:'center'
+};
+const header ={
+    color:'purple',
+    textAlign:'center'
+};
 export default class Agent extends Component {
     constructor(props){
         super(props);
@@ -10,15 +18,34 @@ export default class Agent extends Component {
             name : '',
             phone : '',
             agentID: '',
-            status : 'free'
+            status : 'free',
+            id:'',
+            orders:[]
         }
         this.handleName = this.handleName.bind(this);
         this.handlePhone = this.handlePhone.bind(this);
         this.handleAgentID = this.handleAgentID.bind(this);
+        this.handleID = this.handleID.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         
     }
-    
+    componentDidMount(){
+        axios.get('http://localhost:5000/orders/')
+        .then(res => this.setState({orders:res.data}))
+        .catch(err => console.log(err))
+    }
+    handleID=(e)=>{
+        this.setState({id:e.target.value});
+    }
+    handleChange =()=>{
+        const {status,id} = this.state;
+        axios.post('http://localhost:5000/agents/update/' + id,{status:status})
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err))
 
+        this.setState({id:""});
+        
+    }
      handleName =(e)=>{
         this.setState({name:e.target.value});
         
@@ -51,33 +78,50 @@ export default class Agent extends Component {
         window.location = '/';
 
     }
+
+    deliveredList () {
+        return this.state.orders.filter(currentOrder => currentOrder.status === "delivered").map(currentOrder =>{
+            return <Order order={currentOrder} />
+        })
+    }
+
+    
+    refusedList () {
+        return this.state.orders.filter(currentOrder => currentOrder.status === "refused").map(currentOrder =>{
+            return <Order order={currentOrder} />
+        })
+    }
+
+    rejectedList () {
+        return this.state.orders.filter(currentOrder => currentOrder.status === "rejected").map(currentOrder =>{
+            return <Order order={currentOrder} />
+        })
+    }
+
     render(){
         return (
             <div>
-                <h3>Add new Agent...</h3>
+                <div>agent account will be here!! agentid status date to display agent orders
+                    and agent status will be set to free here too.
+                </div>
                 <div>
-                    <div className="form-group">
-                        <label>Agent full name</label>
+                    <input value={this.state.id} onChange={this.handleID}/>
+                    <button onClick={this.handleChange}>change agent status</button>
+                </div>
+                <h4 style={header}>Add new Agent...</h4>
+                <div className="form-group">
+                    <div className="form-control">
+                        <label style={{padding:"15px 10px"}}>Agent full name</label>
                         <input type="text" onChange={this.handleName} value={this.state.name}
-                        className="form-control" />
-                    </div>
-                    
-                    <div className="form-group">
-                        <label>Agent Phone ..</label>
+                        />
+                        <label style={{padding:"15px 10px"}}>Agent Phone ..</label>
                         <input type="text" onChange={this.handlePhone} value={this.state.phone}
-                        className="form-control"  />
-                    </div>
-
-                    <div className="form-group">
-                        <label>Agent ID ..</label>
+                        />
+                        <label style={{padding:"15px 10px"}}>Agent ID ..</label>
                         <input type="text" onChange={this.handleAgentID} value={this.state.agentID}
-                        className="form-control"  />
+                        />
                     </div>
-
-                    
-                    
-                    
-                    <div className="form-group">
+                    <div className="form-control" style={center}>
                         <button  className="btn btn-primary"
                         onClick={this.handleSubmit}>Submit</button>
                     </div>

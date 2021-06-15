@@ -64,6 +64,7 @@ router.route('/update/:id').post((req,res) => {
     .then(order => {
         order.status = req.body.status; //assign new value to status
         order.agentID = req.body.agentID; //assign new value to agent ID
+        order.date = Date.parse(req.body.date);
         
         
         //save order with updated value

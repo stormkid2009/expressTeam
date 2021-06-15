@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const Reseller = props => (
     <tr>
-        <td>{props.reseller.resellerCode}</td>
+        
         <td>{props.reseller.name}</td>
         <td>{props.reseller.address}</td>
         <td>{props.reseller.phone}</td>
@@ -50,7 +50,7 @@ export default class ResellersList extends Component {
                         <table className="table table-hover table-dark table-bordered ">
                             <thead className="table-secondary">
                                 <tr >
-                                    <th>Reseller Code</th>
+                                    
                                     <th>Reseller Name</th>
                                     <th>Reseller address</th>
                                     <th>Reseller phone number</th>

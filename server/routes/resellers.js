@@ -10,17 +10,19 @@ router.route('/').get((req,res)=>{
 
 router.route('/add').post((req,res)=>{
     //assign request body to variables
+    const _id = req.body._id;
     const name = req.body.name;
     const address = req.body.address;
     const phone = req.body.phone;
-    const resellerCode = req.body.resellerCode;
+    
 
     //fill in our model 
     const newReseller = new Reseller({
+        _id,
         name,
         address,
-        phone,
-        resellerCode
+        phone
+        
         
     })
 
@@ -41,7 +43,7 @@ router.route('/update/:id').post((req,res)=>{
         reseller.name = req.body.name;
         reseller.phone = req.body.phone;
         reseller.address = req.body.address;
-        reseller.resellerCode = req.body.resellerCode;
+        
 
 
         reseller.save()

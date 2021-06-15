@@ -46,21 +46,21 @@ export default class PickUp extends Component {
     chargeOrders =()=>{
         
       //we will doing foreach loop to change status with axios
-      const {order1,order2,order3,order4,order5,order6,agentID}= this.state;
+      const {order1,order2,order3,order4,order5,order6,agentID,date}= this.state;
       const list=[order1,order2,order3,order4,order5,order6];
       for(let i=0;i<list.length;i++){
           if(list[i]===""){
               console.log("invalid id")
           }else{
-            axios.post('http://localhost:5000/orders/update/' + list[i],{status:"charged" , agentID:agentID})
+            axios.post('http://localhost:5000/orders/update/' + list[i],{status:"charged" , agentID:agentID, date:date})
             .then(res => console.log(res.data))
             .catch(err => console.log(err))
           }
         
       }
-        /*axios.post('http://localhost:5000/agents/update/' + agentID,{status:"hired"})
+        axios.post('http://localhost:5000/agents/update/' + agentID,{status:"hired"})
         .then(res => console.log(res.data))
-        .catch(err => console.log(err))*/
+        .catch(err => console.log(err))
          
         
       
@@ -204,7 +204,7 @@ export default class PickUp extends Component {
                         <button className="btn btn-secondary" 
                         onClick={this.chargeOrders}> charge orders</button>
                         <button  className="btn btn-primary" 
-                        onClick={this.handleSubmit}>Submit</button>
+                        onClick={this.handleSubmit}>Register PickUp</button>
                     </div>
                 </div>
                 

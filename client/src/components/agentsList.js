@@ -60,7 +60,7 @@ export default class AgentsList extends Component {
                         <table className="table table-hover table-dark table-bordered ">
                         <thead className="table-secondary">
                             <tr >
-                                <th>Agent code</th>
+                                
                                 <th>Agent Name</th>
                                 <th>Agent Phone Number</th>
                                 <th>Agent status</th>

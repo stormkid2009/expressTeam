@@ -1,6 +1,15 @@
 import React,{useState } from 'react';
 import axios from 'axios';
 
+
+const style = {
+    padding:'10px'
+    
+};
+const header ={
+    color:'purple',
+    textAlign:'center'
+};
 function Reseller() {
     const [name,setName]=useState('');
     const [address,setAddress]=useState('');
@@ -32,7 +41,7 @@ function Reseller() {
             name:name,
             address:address,
             phone:phone,
-            resellerCode:resellerCode
+            _id:resellerCode
         }
         axios.post("http://localhost:5000/resellers/add",reseller)
         .then(res => console.log(res.data))
@@ -40,31 +49,27 @@ function Reseller() {
     }
     return (
         <div>
-            <h3>Add new Reseller</h3>
-            <div>
-                <div className="form-group">
-                        <label>Name of Reseller or Company</label>
-                        <input type="text" onChange={handleName} value={name}
-                        className="form-control" />
+            <h4 style={header}>Add new Reseller</h4>
+            <div className="form-group">
+                <div className="form-control" >
+                        <label style={style}>Name of Reseller or Company</label>
+                        <input type="text" onChange={handleName} value={name}/>
+                        <label style={style}>Address</label>
+                        <input type="text" onChange={handleAddress} value={address}/>
                 </div>
-                <div className="form-group">
-                        <label>Address</label>
-                        <input type="text" onChange={handleAddress} value={address}
-                        className="form-control" />
+                
+                <div className="form-control" >
+                        <label style={style}>Phone Number</label>
+                        <input type="text" onChange={handlePhone} value={phone}/>
+                        <label style={style}>Code of Reseller or Company</label>
+                        <input type="text" onChange={handleResellerCode} value={resellerCode}/>
                 </div>
-                <div className="form-group">
-                        <label>Phone Number</label>
-                        <input type="text" onChange={handlePhone} value={phone}
-                        className="form-control" />
-                </div>
-                <div className="form-group">
-                        <label>Code of Reseller or Company</label>
-                        <input type="text" onChange={handleResellerCode} value={resellerCode}
-                        className="form-control" />
-                </div>
-                <div className="form-group">
+                
+                <div className="form-control" style={{
+                    display:'flex',justifyContent:'center'
+                }}>
                         <button  className="btn btn-primary"
-                        onClick={handleSubmit}>Submit</button>
+                        onClick={handleSubmit}>Register</button>
                 </div>
             </div>
         </div>

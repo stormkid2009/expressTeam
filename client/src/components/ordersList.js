@@ -37,7 +37,7 @@ export default class OrdersList extends Component{
         //axios request to update status
         const order = {
             status:this.state.status,
-            agentCode:"default"
+            agentID:"default"
         }
         
         axios.post("http://localhost:5000/orders/update/" + this.state.id,order)
@@ -55,6 +55,7 @@ export default class OrdersList extends Component{
     handleID =(e)=>{
         this.setState({id:e.target.value});
     }
+    
     deliveredList () {
         return this.state.orders.filter(currentOrder => currentOrder.status === "delivered").map(currentOrder =>{
             return <Order order={currentOrder} />
@@ -111,7 +112,7 @@ export default class OrdersList extends Component{
                             <th>..Address</th>
                             <th>..Phone</th>
                             <th>Total cost</th>
-                            <th>Agent Code</th>
+                            <th>Agent ID</th>
                             <th>..Comission</th>
                             <th>Exp-Fee</th>
                             <th>Date</th>
