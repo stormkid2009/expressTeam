@@ -14,6 +14,7 @@ router.route('/add').post((req,res)=>{
     const name = req.body.name;
     const address = req.body.address;
     const phone = req.body.phone;
+    const credit = Number(req.body.credit);
     
 
     //fill in our model 
@@ -21,9 +22,8 @@ router.route('/add').post((req,res)=>{
         _id,
         name,
         address,
-        phone
-        
-        
+        phone,
+        credit
     })
 
     newReseller.save()
@@ -40,12 +40,8 @@ router.route('/:id').delete((req,res)=>{
 router.route('/update/:id').post((req,res)=>{
     Reseller.findById(req.params.id)
     .then(reseller =>{
-        reseller.name = req.body.name;
-        reseller.phone = req.body.phone;
-        reseller.address = req.body.address;
+        reseller.credit = Number(req.body.credit);
         
-
-
         reseller.save()
         .then(()=> res.json("reseller info has been modifyed! "))
         .catch(err => res.status(400).json("Error: " + err))

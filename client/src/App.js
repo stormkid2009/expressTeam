@@ -10,8 +10,9 @@ import OrdersList from './components/ordersList';
 import AgentsList from './components/agentsList';
 import Reseller from './components/resellerForm';
 import ResellersList from './components/resellersList';
-import Update from './components/update';
+import Credit from './components/credit';
 import PickUp from './components/pickupForm';
+import Comission from './components/commission';
 
 
 function App() {
@@ -26,8 +27,9 @@ function App() {
                <Route path="/agentsList" component={AgentsList}/>
                <Route path="/reseller" component={Reseller} />
                <Route path="/resellersList" component={ResellersList} />
-               <Route path="/update" component={Update} />
+               <Route path="/credit" component={Credit} />
                <Route path="/pickup" component={PickUp} />
+               <Route path="/commission" component={Comission} />
                <Route  path="/" exact component={Home}/>
            </div>
         </Router>

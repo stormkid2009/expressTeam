@@ -23,13 +23,16 @@ function Navbar() {
                     <Link to="/agentsList" className="nav-link">Agents List</Link>
                     </li>
                     <li className="nav-item ">
+                    <Link to="/commission" className="nav-link">Commission</Link>
+                    </li>
+                    <li className="nav-item ">
                     <Link to="/reseller" className="nav-link">Reseller Panel</Link>
                     </li>
                     <li className="nav-item ">
                     <Link to="/resellersList" className="nav-link">Resellers List</Link>
                     </li>
                     <li className="nav-item ">
-                    <Link to="/update" className="nav-link">update Request</Link>
+                    <Link to="/credit" className="nav-link">Credit</Link>
                     </li>
                     <li className="nav-item ">
                     <Link to="/pickup" className="nav-link">set pickup</Link>

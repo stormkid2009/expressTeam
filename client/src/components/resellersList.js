@@ -8,6 +8,7 @@ const Reseller = props => (
         <td>{props.reseller.address}</td>
         <td>{props.reseller.phone}</td>
         <td>{props.reseller._id}</td>
+        <td>{props.reseller.credit}</td>
     </tr>
 )
 export default class ResellersList extends Component {
@@ -55,6 +56,7 @@ export default class ResellersList extends Component {
                                     <th>Reseller address</th>
                                     <th>Reseller phone number</th>
                                     <th>Reseller ID</th>
+                                    <th>Reseller Credit</th>
 
                                 </tr>
                             </thead>

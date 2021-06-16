@@ -41,7 +41,8 @@ function Reseller() {
             name:name,
             address:address,
             phone:phone,
-            _id:resellerCode
+            _id:resellerCode,
+            credit:0
         }
         axios.post("http://localhost:5000/resellers/add",reseller)
         .then(res => console.log(res.data))
