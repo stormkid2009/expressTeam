@@ -36,11 +36,11 @@ export default class OrdersList extends Component{
     handleUpdate =()=>{
         //axios request to update status
         const order = {
-            status:this.state.status,
-            agentID:"default"
+            status:this.state.status
+            
         }
         
-        axios.post("http://localhost:5000/orders/update/" + this.state.id,order)
+        axios.post("http://localhost:5000/orders/status/" + this.state.id,order)
         .then(res => console.log(res.data))
         .catch(err => console.log(err))
         window.location = "/";
@@ -55,7 +55,7 @@ export default class OrdersList extends Component{
     handleID =(e)=>{
         this.setState({id:e.target.value});
     }
-    
+
     deliveredList () {
         return this.state.orders.filter(currentOrder => currentOrder.status === "delivered").map(currentOrder =>{
             return <Order order={currentOrder} />
@@ -101,7 +101,6 @@ export default class OrdersList extends Component{
                 </select>
                 
                 <div >
-                    
                     <table className="table table-hover table-dark table-bordered " >
                         <thead className="table-secondary">
                         <tr >
@@ -127,7 +126,7 @@ export default class OrdersList extends Component{
                         </tbody>
                         </table>
                 </div>
-                <h5 style={{textAlign:"center",color:"purple"}}>Update an Order</h5>
+                <h5 style={{textAlign:"center",color:"purple"}}>Update Charged Order Status</h5>
                 <div style={{padding:"10px",borderStyle:"inset"}}>
                     <div style={{padding:"10px"}}>
                         <label style={{padding:"10px"}}> Enter Order ID</label>
@@ -146,7 +145,7 @@ export default class OrdersList extends Component{
                         </select>
                     </div>
                     <div style={{padding:"10px" ,display:'flex',justifyContent:'space-evenly'}}>
-                        <button className="btn btn-outline-primary" onClick={this.handleUpdate}>Update Status</button>
+                        <button className="btn btn-outline-primary" onClick={this.handleUpdate}>Update order Status</button>
                         <button className="btn btn-outline-danger" onClick={this.handleDelete}>Delete order</button>
                     </div>
                     

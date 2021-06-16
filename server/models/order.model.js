@@ -8,11 +8,11 @@ const orderSchema = new Schema({
     recipientAddress:{type: String, required: true},
     recipientPhone:{type:String,required:true},
     totalCost:{type: Number, required: true},
-    agentID:{type:String,required:true},
+    agentID:{type:String},
     agentCommission:{type: Number, required: true},
     expressFee:{type: Number, required: true},
-    date:{type: Date, required: true},
-    status:{type:String,required: true},
+    date:{type: Date},
+    status:{type:String},
     notes:{type:String}
 },{
     timestamps: true,

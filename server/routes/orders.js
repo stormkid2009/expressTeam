@@ -59,13 +59,36 @@ router.route('/:id').delete((req,res) => {
 });
 
 //setup route to update pickup :
-router.route('/update/:id').post((req,res) => {
+router.route('/date/:id').post((req,res) => {
+    Order.findById(req.params.id)
+    .then(order => {
+        order.date = Date.parse(req.body.date);   //update to charge date
+        //save order with updated value
+        order.save()
+        .then(()=> res.json("order date has been updated successfully !"))
+        .catch(err => res.status(400).json('Error :' + err))
+    })
+    .catch(err => res.status(400).json('Error :' + err))
+});
+
+router.route('/agentID/:id').post((req,res) => {
+    Order.findById(req.params.id)
+    .then(order => {
+        
+        order.agentID = req.body.agentID; //assign new value to agent ID
+           
+        //save order with updated value
+        order.save()
+        .then(()=> res.json("order agent ID has been updated successfully !"))
+        .catch(err => res.status(400).json('Error :' + err))
+    })
+    .catch(err => res.status(400).json('Error :' + err))
+});
+
+router.route('/status/:id').post((req,res) => {
     Order.findById(req.params.id)
     .then(order => {
         order.status = req.body.status; //assign new value to status
-        order.agentID = req.body.agentID; //assign new value to agent ID
-        order.date = Date.parse(req.body.date);
-        
         
         //save order with updated value
         order.save()

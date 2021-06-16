@@ -52,7 +52,13 @@ export default class PickUp extends Component {
           if(list[i]===""){
               console.log("invalid id")
           }else{
-            axios.post('http://localhost:5000/orders/update/' + list[i],{status:"charged" , agentID:agentID, date:date})
+            axios.post('http://localhost:5000/orders/agentID/' + list[i],{ agentID:agentID})
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err))
+            axios.post('http://localhost:5000/orders/status/' +list[i],{status:"charged"})
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err))
+            axios.post('http://localhost:5000/orders/date/' +list[i],{date:date})
             .then(res => console.log(res.data))
             .catch(err => console.log(err))
           }
