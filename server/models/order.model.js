@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 const orderSchema = new Schema({
-    resellerCode:{type: String, required: true},
+    resellerID:{type: String, required: true},
     item :{type: String, required: true},
     recipientName:{type: String, required: true},
     recipientAddress:{type: String, required: true},

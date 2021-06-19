@@ -13,6 +13,7 @@ import ResellersList from './components/resellersList';
 import Credit from './components/credit';
 import PickUp from './components/pickupForm';
 import Comission from './components/commission';
+import PickupsList from './components/pickupsList';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                <Route path="/credit" component={Credit} />
                <Route path="/pickup" component={PickUp} />
                <Route path="/commission" component={Comission} />
+               <Route path="/pickupsList" component={PickupsList} />
                <Route  path="/" exact component={Home}/>
            </div>
         </Router>

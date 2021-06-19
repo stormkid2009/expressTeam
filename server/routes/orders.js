@@ -10,7 +10,7 @@ router.route('/').get((req,res)=>{
 
 router.route('/add').post((req,res)=>{
     //assign request body to variables
-    const resellerCode = req.body.resellerCode;
+    const resellerID = req.body.resellerID;
     const item = req.body.item;
     const recipientName = req.body.recipientName;
     const recipientAddress = req.body.recipientAddress;
@@ -25,7 +25,7 @@ router.route('/add').post((req,res)=>{
 
     //fill in our model 
     const newOrder = new Order({
-        resellerCode,
+        resellerID,
         item ,
         recipientName,
         recipientAddress,

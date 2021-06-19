@@ -15,6 +15,7 @@ export default class AgentsList extends Component {
         this.handleDelete = this.handleDelete.bind(this);
         this.handleID = this.handleID.bind(this);
     }
+    
     componentDidMount() {
         axios.get("http://localhost:5000/agents/")
         .then(response => this.setState({agents:response.data}))

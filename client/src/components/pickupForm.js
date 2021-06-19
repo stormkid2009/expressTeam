@@ -151,7 +151,7 @@ export default class PickUp extends Component {
                         <tr >
                         
                             <th>Item</th>
-                            <th>Res Code</th>
+                            <th>Res ID</th>
                             <th>Client</th>
                             <th>..Address</th>
                             <th>..Phone</th>
@@ -174,7 +174,8 @@ export default class PickUp extends Component {
                         display:'flex',justifyContent:'space-around'
                     }}>
                         <label>Date</label>
-                        <DatePicker selected={date} onChange={this.handleDate}/>
+                        <DatePicker selected={date} onChange={this.handleDate}
+                        dateFormat="dd/MM/yyyy"  isClearable />
                         <label>Notes</label>
                         <input type="text" onChange={this.handleNotes} value={notes}/>
                         <label>Agent Code</label>

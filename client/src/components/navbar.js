@@ -37,6 +37,9 @@ function Navbar() {
                     <li className="nav-item ">
                     <Link to="/pickup" className="nav-link">set pickup</Link>
                     </li>
+                    <li className="nav-item ">
+                    <Link to="/pickupsList" className="nav-link">Pickups List</Link>
+                    </li>
                 </ul>
             </div>
         </nav>

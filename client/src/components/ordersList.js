@@ -106,13 +106,13 @@ export default class OrdersList extends Component{
                         <tr >
                         
                             <th>Item</th>
-                            <th>Res Code</th>
+                            <th>Res ID</th>
                             <th>Client</th>
-                            <th>..Address</th>
-                            <th>..Phone</th>
+                            <th>Address..</th>
+                            <th>Phone</th>
                             <th>Total cost</th>
                             <th>Agent ID</th>
-                            <th>..Comission</th>
+                            <th>Comission..</th>
                             <th>Exp-Fee</th>
                             <th>Date</th>
                             <th>Notes..</th>

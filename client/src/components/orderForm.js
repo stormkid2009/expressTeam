@@ -11,7 +11,7 @@ export default class Order extends Component {
     constructor(props){
         super(props);
         this.state = {
-            resellerCode:'',
+            resellerID:'',
             item:'',
             recipientName:'',
             recipientAddress:'',
@@ -25,7 +25,7 @@ export default class Order extends Component {
             notes:''
             
         }
-        this.handleResellerCode = this.handleResellerCode.bind(this);
+        this.handleResellerID = this.handleResellerID.bind(this);
         this.handleItem = this.handleItem.bind(this);
         this.handleRecipientName = this.handleRecipientName.bind(this);
         this.handleRecipientAddress = this.handleRecipientAddress.bind(this);
@@ -39,8 +39,8 @@ export default class Order extends Component {
     }
     
 
-    handleResellerCode=(e)=>{
-        this.setState({resellerCode:e.target.value});
+    handleResellerID=(e)=>{
+        this.setState({resellerID:e.target.value});
         
     }
 
@@ -93,7 +93,7 @@ export default class Order extends Component {
     handleSubmit = () =>{
         
         const order = {
-            resellerCode:this.state.resellerCode,
+            resellerID:this.state.resellerID,
             item:this.state.item,
             recipientName:this.state.recipientName,
             recipientAddress:this.state.recipientAddress,
@@ -112,7 +112,7 @@ export default class Order extends Component {
         window.location = '/';
     }
     render(){
-        const {resellerCode,item,recipientName,recipientAddress,recipientPhone,
+        const {resellerID,item,recipientName,recipientAddress,recipientPhone,
         totalCost,notes,agentCommission,expressFee,date} = this.state;
         return (
             <div>
@@ -122,8 +122,8 @@ export default class Order extends Component {
                     
                     <div className="form-group">
                         <div className="form-control">
-                        <label style={style}>Reseller Code</label>
-                        <input type="text" onChange={this.handleResellerCode} value={resellerCode}
+                        <label style={style}>Reseller ID</label>
+                        <input type="text" onChange={this.handleResellerID} value={resellerID}
                         />
                         <label style={style}>Item ..</label>
                         <input type="text" onChange={this.handleItem} value={item}/>
