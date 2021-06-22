@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 import Pickup from './pickup';
+import Order from './order';
+import {flex} from './modules/styles';
+import unique from './modules/key';
 //unique will generate key and we can implement this to all our list over the application
-let unique =() => {
-    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-}
+
+
+
+
 export default class PickupsList extends Component {
     constructor(props) {
         super(props);
@@ -12,24 +18,40 @@ export default class PickupsList extends Component {
         this.state = {
              pickups:[],
              orders:[],
+             ordersList:[],
+             list:[],
+             date:new Date(),
              id:""
         }
         this.handleID = this.handleID.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        this.fetch = this.fetch.bind(this);
+        this.displayOrders = this.displayOrders.bind(this);
+        this.handleDate = this.handleDate.bind(this);
     }
     componentDidMount(){
         axios.get('http://localhost:5000/pickups/')
         .then(res => this.setState({pickups:res.data}))
         .catch(err => console.log(err))
+
+        axios.get('http://localhost:5000/orders/')
+                .then(res => this.setState({orders : res.data}))
+                .catch(err => console.log(err))
     }
+
     pickupsList(){
-        return this.state.pickups.map(current => { return <Pickup pickup = {current} key={unique()}/> ;})
+        return this.state.pickups.filter(current => Date.parse(current.date) > Date.parse(this.state.date)).map(current => { return <Pickup pickup = {current} key={unique()}/> ;})
         
     }
+
+    handleDate=(date)=>{
+        this.setState({date:date});
+        
+    }
+
     handleID =(e)=>{
         this.setState({id:e.target.value});
     }
+
     handleClick =()=>{
         
         let item = this.state.pickups.filter(current => current._id === this.state.id);
@@ -39,47 +61,97 @@ export default class PickupsList extends Component {
         for(let property in obj){
             if(property.match(regex)){
                 this.setState(prevState => ({
-                    orders: [...prevState.orders, obj[property]]
+                    ordersList: [...prevState.ordersList, obj[property]]
                   }))
             }
         }
+        this.setState({id:''});
+         
+    }
+
+    displayOrders =()=>{
+        //we need to map over the orders and retrieve the values of orders with ids in the orderList
+        const {ordersList,orders}=this.state;
+        let list =[];
+        for(let i=0; i<ordersList.length; i++){
+            if(ordersList[i]===''){
+                console.log('empty value!!')
+            }else{
+                
+                let add =orders.filter(current => current._id === ordersList[i]);
+                list = [...list,add];
+            }
+        }
+       
+        return list.flat().map(current =>{
+            return <Order order = {current} key={unique()} />;
+        })
         
          
     }
-    fetch =()=>{
-        const {orders} = this.state;
-        for(let i=0; i< orders.length;i++){
-            if(orders[i]=== ""){
-                console.log("empty")
-            }else{
-                axios.get('http://localhost:5000/orders/' + this.state.orders[i])
-                .then(res => console.log(res.data))
-                .catch(err => console.log(err))
-                //console.log(orders[i]);
-            }
-        }
-        this.setState({orders:[]})
+    test=()=>{
+        let data = this.state.orders.map(current => current.date);
+        console.log(data);
     }
     render() {
         return (
             <div>
+                <div className="form-control" style={flex}>
+                    <label >search pickups after ........</label>
+                    <DatePicker selected={this.state.date} onChange={this.handleDate} 
+                     dateFormat="dd/MM/yyyy"  isClearable />
+                     <button onClick={
+                        ()=> window.location.reload()
+                    } className="btn btn-danger">Refresh</button>
+                </div>
+                
+                                
                 <table className="table table-hover table-dark table-bordered ">
-                        <thead className="table-secondary">
-                            <tr > 
-                                <th>Date</th>
-                                <th>Notes</th>
-                                <th>Agent ID</th>
-                                <th>pickup ID</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                {this.pickupsList()}
-                            </tbody>
-                            </table>
-                            <input value={this.state.id}
-                            onChange={this.handleID}/>
-                <button onClick={this.handleClick}>display</button>
-                <button onClick={this.fetch}>click</button>
+                    <thead className="table-secondary">
+                        <tr > 
+                            <th>Date</th>
+                            <th>Notes</th>
+                            <th>Agent ID</th>
+                            <th>pickup ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.pickupsList()}
+                    </tbody>
+                </table>
+                <div className="form-control" style={flex}>
+                    
+                    <label >enter pick up id...</label>
+                    <input value={this.state.id} onChange={this.handleID} />
+                    
+                    <button onClick={this.handleClick} className="btn btn-primary">display Orders</button>
+                    
+                </div>
+                
+                <table className="table table-hover table-dark table-bordered " >
+                    <thead className="table-secondary">
+                        <tr>
+                            
+                            <th>Res ID</th>
+                            <th>Item</th>
+                            <th>Client</th>
+                            <th>Address..</th>
+                            <th>Phone</th>
+                            <th>Total cost</th>
+                            <th>Agent ID</th>
+                            <th>Comission..</th>
+                            <th>Exp-Fee</th>
+                            <th>Date</th>
+                            <th>Notes..</th>
+                            <th>order ID</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        {this.displayOrders()}
+                    </tbody>
+                </table>
+                
             </div>
         );
     }

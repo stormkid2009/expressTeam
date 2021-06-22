@@ -208,7 +208,7 @@ export default class PickUp extends Component {
                     <div className="form-control" style={{
                         display:'flex',justifyContent:'center'
                     }}>
-                        <button className="btn btn-secondary" 
+                        <button className="btn btn-success" 
                         onClick={this.chargeOrders}> charge orders</button>
                         <button  className="btn btn-primary" 
                         onClick={this.handleSubmit}>Register PickUp</button>

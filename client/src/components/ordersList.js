@@ -104,9 +104,8 @@ export default class OrdersList extends Component{
                     <table className="table table-hover table-dark table-bordered " >
                         <thead className="table-secondary">
                         <tr >
-                        
-                            <th>Item</th>
                             <th>Res ID</th>
+                            <th>Item</th>
                             <th>Client</th>
                             <th>Address..</th>
                             <th>Phone</th>

@@ -4,9 +4,8 @@ export default function Order(props) {
     return (
         
              <tr >
-            
+                <td>{props.order.resellerID}</td>
                 <td>{props.order.item}</td>
-                <td>{props.order.resellerCode}</td>
                 <td>{props.order.recipientName}</td>
                 <td>{props.order.recipientAddress}</td>
                 <td>{props.order.recipientPhone}</td>
