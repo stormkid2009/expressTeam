@@ -11,7 +11,8 @@ export default class Comission extends Component {
         this.state = {
              orders:[],
              list:'',
-             id:''
+             id:'',
+             status:"free"
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleID = this.handleID.bind(this);
@@ -24,21 +25,21 @@ export default class Comission extends Component {
     }
 
     deliveredList () {
-        return this.state.orders.filter(currentOrder => currentOrder.status === "delivered" && currentOrder.agentID === this.state.agent_ID)
+        return this.state.orders.filter(currentOrder => currentOrder.status === "delivered" && currentOrder.agentID === this.state.id)
         .map(currentOrder =>{
             return <Order order={currentOrder} />
         })
     }
 
     refusedList () {
-        return this.state.orders.filter(currentOrder => currentOrder.status === "refused" && currentOrder.agentID === this.state.agent_ID)
+        return this.state.orders.filter(currentOrder => currentOrder.status === "refused" && currentOrder.agentID === this.state.id)
         .map(currentOrder =>{
             return <Order order={currentOrder} />
         })
     }
 
     rejectedList () {
-        return this.state.orders.filter(currentOrder => currentOrder.status === "rejected" && currentOrder.agentID=== this.state.agent_ID)
+        return this.state.orders.filter(currentOrder => currentOrder.status === "rejected" && currentOrder.agentID=== this.state.id)
         .map(currentOrder =>{
             return <Order order={currentOrder} />
         })
@@ -50,7 +51,7 @@ export default class Comission extends Component {
         .then(res => console.log(res.data))
         .catch(err => console.log(err))
 
-        this.setState({agent_ID:""});
+        this.setState({id:""});
         window.location = '/'
         
     }

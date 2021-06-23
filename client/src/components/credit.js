@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Order from './order'
-import { center,flex } from './modules/styles';
+import { center,flex ,padding} from './modules/styles';
 
 
 
@@ -49,20 +49,20 @@ export default class Credit extends Component {
         window.location = '/';
     }
     deliveredList () {
-        return this.state.orders.filter(currentOrder => currentOrder.status === "delivered" && currentOrder.resellerCode === this.state.resellerID)
+        return this.state.orders.filter(currentOrder => currentOrder.status === "delivered" && currentOrder.resellerID === this.state.resellerID)
         .map(currentOrder =>{
             return <Order order={currentOrder} />
         })
     }
     refusedList () {
-        return this.state.orders.filter(currentOrder => currentOrder.status === "refused" && currentOrder.resellerCode === this.state.resellerID)
+        return this.state.orders.filter(currentOrder => currentOrder.status === "refused" && currentOrder.resellerID === this.state.resellerID)
         .map(currentOrder =>{
             return <Order order={currentOrder} />
         })
     }
 
     rejectedList () {
-        return this.state.orders.filter(currentOrder => currentOrder.status === "rejected" && currentOrder.resellerCode === this.state.resellerID)
+        return this.state.orders.filter(currentOrder => currentOrder.status === "rejected" && currentOrder.resellerID === this.state.resellerID)
         .map(currentOrder =>{
             return <Order order={currentOrder} />
         })
@@ -73,7 +73,7 @@ export default class Credit extends Component {
             <div>
                 <div className="form-control" style={flex}>
                     <div>
-                        <label style={{padding:'8px'}}>Enter reseller ID</label>
+                        <label style={padding}>Enter reseller ID</label>
                         <input value={resellerID} onChange={this.handleResellerID}/>
                     </div>
                 
