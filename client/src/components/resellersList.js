@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { header,flex, padding, danger } from './modules/styles';
 
 const Reseller = props => (
     <tr>
@@ -44,7 +45,7 @@ export default class ResellersList extends Component {
         const {id} = this.state;
         return (
             <div>
-                <h5 style={{textAlign:"center",color:"purple"}}>list of current resellers</h5>
+                <h5 style={header}>list of current resellers</h5>
                 
                     <div >
                         
@@ -66,13 +67,13 @@ export default class ResellersList extends Component {
                             </tbody>
                         </table>
                     </div>
-                    <div style={{display:'flex',justifyContent:'space-between'}}>
+                    <div style={flex}>
                         <div >
-                            <label style={{paddingRight:"10px"}}> Reseller ID ....</label>
+                            <label style={padding}> Reseller ID ....</label>
                             <input value={id} onChange={this.handleID}/>
                         </div>
                         <div>
-                            <span style={{color:"red"}}>Be careful this reseller will be removed permenantly</span>
+                            <span style={danger}>Be careful this reseller will be removed permenantly</span>
                         </div>
                         <div>
                             <button className="btn btn-outline-danger" onClick={this.handleDelete}>Delete Reseller</button>

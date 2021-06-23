@@ -1,16 +1,9 @@
 
 import React, {Component} from 'react';
 import axios from 'axios';
+import { center,header,padding } from './modules/styles';
 
 
-const center = {
-    display:'flex',
-    justifyContent:'center'
-};
-const header ={
-    color:'purple',
-    textAlign:'center'
-};
 export default class Agent extends Component {
     constructor(props){
         super(props);
@@ -73,13 +66,13 @@ export default class Agent extends Component {
                 
                 <div className="form-group">
                     <div className="form-control">
-                        <label style={{padding:"15px 10px"}}>Agent full name</label>
+                        <label style={padding}>Agent full name</label>
                         <input type="text" onChange={this.handleName} value={this.state.name}
                         />
-                        <label style={{padding:"15px 10px"}}>Agent Phone ..</label>
+                        <label style={padding}>Agent Phone ..</label>
                         <input type="text" onChange={this.handlePhone} value={this.state.phone}
                         />
-                        <label style={{padding:"15px 10px"}}>Agent ID ..</label>
+                        <label style={padding}>Agent ID ..</label>
                         <input type="text" onChange={this.handleID} value={id}
                         />
                     </div>

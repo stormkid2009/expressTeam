@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import Order from './order';
+import { padding ,header} from './modules/styles';
 
 
 
@@ -103,20 +104,20 @@ export default class OrdersList extends Component{
                 <div >
                     <table className="table table-hover table-dark table-bordered " >
                         <thead className="table-secondary">
-                        <tr >
-                            <th>Res ID</th>
-                            <th>Item</th>
-                            <th>Client</th>
-                            <th>Address..</th>
-                            <th>Phone</th>
-                            <th>Total cost</th>
-                            <th>Agent ID</th>
-                            <th>Comission..</th>
-                            <th>Exp-Fee</th>
-                            <th>Date</th>
-                            <th>Notes..</th>
-                            <th>order ID</th>
-                        </tr>
+                            <tr >
+                                <th>Res ID</th>
+                                <th>Item</th>
+                                <th>Client</th>
+                                <th>Address..</th>
+                                <th>Phone</th>
+                                <th>Total cost</th>
+                                <th>Agent ID</th>
+                                <th>Comission..</th>
+                                <th>Exp-Fee</th>
+                                <th>Date</th>
+                                <th>Notes..</th>
+                                <th>order ID</th>
+                            </tr>
                         </thead>
                         <tbody >
                             {list === "pending"? this.pendingList():list === "charged" ? this.chargedList():
@@ -125,15 +126,15 @@ export default class OrdersList extends Component{
                         </tbody>
                         </table>
                 </div>
-                <h5 style={{textAlign:"center",color:"purple"}}>Update Charged Order Status</h5>
+                <h5 style={header}>Update Charged Order Status</h5>
                 <div style={{padding:"10px",borderStyle:"inset"}}>
-                    <div style={{padding:"10px"}}>
-                        <label style={{padding:"10px"}}> Enter Order ID</label>
+                    <div style={padding}>
+                        <label style={padding}> Enter Order ID</label>
                         <input value={id} onChange={this.handleID}/>
                     </div>
                     
                     
-                    <div style={{padding:"10px"}}>
+                    <div style={padding}>
                         
                         <select className ="form-select" aria-label="Default select example"
                         onChange={this.handleChange}>

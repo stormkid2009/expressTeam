@@ -3,6 +3,7 @@ import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import Order from './order';
+import { around, center, header } from './modules/styles';
 
 export default class PickUp extends Component {
     //get all pending orders here so we can charge what we want to this pickup
@@ -45,7 +46,8 @@ export default class PickUp extends Component {
 
     chargeOrders =()=>{
         
-      //we will doing foreach loop to change status with axios
+      
+      //loop with for loop because foreach will fail
       const {order1,order2,order3,order4,order5,order6,agentID,date}= this.state;
       const list=[order1,order2,order3,order4,order5,order6];
       for(let i=0;i<list.length;i++){
@@ -145,24 +147,23 @@ export default class PickUp extends Component {
         const {date,notes,agentID,order1,order2,order3,order4,order5,order6} = this.state;
         return (
             <div>
-                <h5 style={{color:"purple",textAlign:"center"}}>list of pending orders</h5>
+                <h5 style={header}>list of pending orders</h5>
                 <table className="table table-hover table-dark table-bordered " >
                         <thead className="table-secondary">
-                        <tr >
-                        
-                            <th>Item</th>
-                            <th>Res ID</th>
-                            <th>Client</th>
-                            <th>..Address</th>
-                            <th>..Phone</th>
-                            <th>Total cost</th>
-                            <th>Agent Code</th>
-                            <th>..Comission</th>
-                            <th>Exp-Fee</th>
-                            <th>Date</th>
-                            <th>Notes..</th>
-                            <th>order ID</th>
-                        </tr>
+                            <tr >
+                                <th>Item</th>
+                                <th>Res ID</th>
+                                <th>Client</th>
+                                <th>..Address</th>
+                                <th>..Phone</th>
+                                <th>Total cost</th>
+                                <th>Agent Code</th>
+                                <th>..Comission</th>
+                                <th>Exp-Fee</th>
+                                <th>Date</th>
+                                <th>Notes..</th>
+                                <th>order ID</th>
+                            </tr>
                         </thead>
                         <tbody >
                             {this.pendingList()}
@@ -170,9 +171,7 @@ export default class PickUp extends Component {
                         </table>
                 
                 <div className="form-group">
-                    <div className="form-control" style={{
-                        display:'flex',justifyContent:'space-around'
-                    }}>
+                    <div className="form-control" style={around}>
                         <label>Date</label>
                         <DatePicker selected={date} onChange={this.handleDate}
                         dateFormat="dd/MM/yyyy"  isClearable />
@@ -183,9 +182,7 @@ export default class PickUp extends Component {
                     </div>
                     
                     
-                    <div className="form-control" style={{
-                        display:'flex',justifyContent:'space-around'
-                    }}>
+                    <div className="form-control" style={around}>
                         <label>Order1</label>
                         <input type="text" onChange={this.handleOrder1} value={order1}/>
                         <label>Order2</label>
@@ -194,9 +191,7 @@ export default class PickUp extends Component {
                         <input type="text" onChange={this.handleOrder3} value={order3}/>
                     </div>
                     
-                    <div className="form-control" style={{
-                        display:'flex',justifyContent:'space-around'
-                    }}>
+                    <div className="form-control" style={around}>
                         <label>Order4</label>
                         <input type="text" onChange={this.handleOrder4} value={order4}/>
                         <label>Order5</label>
@@ -205,9 +200,7 @@ export default class PickUp extends Component {
                         <input type="text" onChange={this.handleOrder6} value={order6}/>
                     </div>
                     
-                    <div className="form-control" style={{
-                        display:'flex',justifyContent:'center'
-                    }}>
+                    <div className="form-control" style={center}>
                         <button className="btn btn-success" 
                         onClick={this.chargeOrders}> charge orders</button>
                         <button  className="btn btn-primary" 

@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { padding,header,center } from './modules/styles';
 
-const style={
-    padding:'10px'
-}
+
 
 export default class Order extends Component {
     constructor(props){
@@ -48,8 +47,6 @@ export default class Order extends Component {
         this.setState({item:e.target.value});
         
     }
-
-    
 
     handleRecipientName =(e)=>{
         this.setState({recipientName:e.target.value})
@@ -116,16 +113,16 @@ export default class Order extends Component {
         totalCost,notes,agentCommission,expressFee,date} = this.state;
         return (
             <div>
-                <h4 style={{textAlign:'center',color:'purple'}}>Add new Order</h4>
+                <h4 style={header}>Add new Order</h4>
                 <div>
                     
                     
                     <div className="form-group">
                         <div className="form-control">
-                        <label style={style}>Reseller ID</label>
+                        <label style={padding}>Reseller ID</label>
                         <input type="text" onChange={this.handleResellerID} value={resellerID}
                         />
-                        <label style={style}>Item ..</label>
+                        <label style={padding}>Item ..</label>
                         <input type="text" onChange={this.handleItem} value={item}/>
                         </div>   
                     </div>
@@ -133,11 +130,11 @@ export default class Order extends Component {
                     
                     <div className="form-group">
                         <div className="form-control">
-                            <label style={style}>Recipient Name</label>
+                            <label style={padding}>Recipient Name</label>
                             <input type="text" onChange={this.handleRecipientName} value={recipientName}/>
-                            <label style={style}>Recipient Adress</label>
+                            <label style={padding}>Recipient Adress</label>
                             <input type="text" onChange={this.handleRecipientAddress} value={recipientAddress}/>
-                            <label style={style}>Recipient Phone</label>
+                            <label style={padding}>Recipient Phone</label>
                             <input type="text" onChange={this.handleRecipientPhone} value={recipientPhone}/>
                         </div>
                         
@@ -145,33 +142,31 @@ export default class Order extends Component {
                     
                     <div className="form-group">
                         <div className="form-control">
-                            <label style={style}>Total cost</label>
+                            <label style={padding}>Total cost</label>
                             <input type="text" onChange={this.handleTotalCost} value={totalCost}/>
-                            <label style={style}>Agent Commission</label>
+                            <label style={padding}>Agent Commission</label>
                             <input type="text" onChange={this.handleAgentCommission} value={agentCommission} />
-                            <label style={style}>Express Fee</label>
+                            <label style={padding}>Express Fee</label>
                             <input type="text" onChange={this.handleExpressFee} value={expressFee}/>
                         </div>
                         
                     </div>
                     <div className="form-group">
                         <div className="form-control">
-                            <label style={style}>Date of Order</label>
+                            <label style={padding}>Date of Order</label>
                             
                                 <DatePicker selected={date} onChange={this.handleDate}
                                 dateFormat="dd/MM/yyyy" 
                                 isClearable />
                             
-                            <label style={style}>Notes...</label>
+                            <label style={padding}>Notes...</label>
                             <input type="text" onChange={this.handleNotes} value={notes}/>
                         </div>
                         
                     </div>
                     
                     <div className="form-group">
-                        <div className="form-control" style={{
-                            display:'flex',justifyContent:'center'
-                        }}>
+                        <div className="form-control" style={center}>
                             <button  className="btn btn-primary" 
                             onClick={this.handleSubmit}>Submit</button>
                         </div>

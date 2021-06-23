@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Order from './order'
+import { center,flex } from './modules/styles';
 
-const center = {
-    display:'flex',
-    justifyContent:'center'
-};
 
 
 export default class Credit extends Component {
@@ -74,8 +71,7 @@ export default class Credit extends Component {
         const {list,resellerID,credit} = this.state;
         return (
             <div>
-                <div className="form-control" style={{
-                    display:'flex',justifyContent:'space-between',color:'blue'}}>
+                <div className="form-control" style={flex}>
                     <div>
                         <label style={{padding:'8px'}}>Enter reseller ID</label>
                         <input value={resellerID} onChange={this.handleResellerID}/>
@@ -91,20 +87,19 @@ export default class Credit extends Component {
                 <div >
                     <table className="table table-hover table-dark table-bordered " >
                         <thead className="table-secondary">
-                        <tr >
-                        
-                            <th>Item</th>
-                            <th>Res Code</th>
-                            <th>Client</th>
-                            <th>..Address</th>
-                            <th>..Phone</th>
-                            <th>Total cost</th>
-                            <th>Agent ID</th>
-                            <th>..Comission</th>
-                            <th>Exp-Fee</th>
-                            <th>Date</th>
-                            <th>Notes..</th>
-                            <th>order ID</th>
+                            <tr >
+                                <th>Item</th>
+                                <th>Res Code</th>
+                                <th>Client</th>
+                                <th>..Address</th>
+                                <th>..Phone</th>
+                                <th>Total cost</th>
+                                <th>Agent ID</th>
+                                <th>..Comission</th>
+                                <th>Exp-Fee</th>
+                                <th>Date</th>
+                                <th>Notes..</th>
+                                <th>order ID</th>
                             </tr>
                         </thead>
                         <tbody >

@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Order from './order';
+import { center,padding,header } from './modules/styles';
 
-const center = {
-    display:'flex',
-    justifyContent:'center'
-};
-const header ={
-    color:'purple',
-    textAlign:'center'
-};
 
 export default class Comission extends Component {
     constructor(props) {
@@ -79,7 +72,7 @@ export default class Comission extends Component {
                     display:'flex',justifyContent:'space-between',color:'blue'
                 }}>
                     <div>
-                        <label style={{padding:'8px'}}>Enter Agent ID</label>
+                        <label style={padding}>Enter Agent ID</label>
                         <input value={id} onChange={this.handleID}/>
                     </div>
                 
@@ -91,25 +84,23 @@ export default class Comission extends Component {
                     <option value="refused">Refused</option>
                 </select>
                 </div>
-
                 <div >
                     <table className="table table-hover table-dark table-bordered " >
                         <thead className="table-secondary">
-                        <tr >
-                        
-                            <th>Item</th>
-                            <th>Res Code</th>
-                            <th>Client</th>
-                            <th>..Address</th>
-                            <th>..Phone</th>
-                            <th>Total cost</th>
-                            <th>Agent ID</th>
-                            <th>..Comission</th>
-                            <th>Exp-Fee</th>
-                            <th>Date</th>
-                            <th>Notes..</th>
-                            <th>order ID</th>
-                        </tr>
+                            <tr >
+                                <th>Item</th>
+                                <th>Res Code</th>
+                                <th>Client</th>
+                                <th>..Address</th>
+                                <th>..Phone</th>
+                                <th>Total cost</th>
+                                <th>Agent ID</th>
+                                <th>..Comission</th>
+                                <th>Exp-Fee</th>
+                                <th>Date</th>
+                                <th>Notes..</th>
+                                <th>order ID</th>
+                            </tr>
                         </thead>
                         <tbody >
                             {list === "pending"? this.pendingList():list === "charged" ? this.chargedList():
