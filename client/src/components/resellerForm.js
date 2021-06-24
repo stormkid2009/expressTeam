@@ -8,7 +8,7 @@ function Reseller() {
     const [name,setName]=useState('');
     const [address,setAddress]=useState('');
     const [phone,setPhone]=useState('');
-    const [resellerCode,setResellerCode]=useState('');
+    const [resellerID,setResellerID]=useState('');
 
     const handleName =(e)=>{
         setName(e.target.value);
@@ -25,8 +25,8 @@ function Reseller() {
         
     }
 
-    const handleResellerCode =(e)=>{
-        setResellerCode(e.target.value);
+    const handleResellerID =(e)=>{
+        setResellerID(e.target.value);
         
     }
 
@@ -35,7 +35,7 @@ function Reseller() {
             name:name,
             address:address,
             phone:phone,
-            _id:resellerCode,
+            _id:resellerID,
             credit:0
         }
         axios.post("http://localhost:5000/resellers/add",reseller)
@@ -57,7 +57,7 @@ function Reseller() {
                         <label style={padding}>Phone Number</label>
                         <input type="text" onChange={handlePhone} value={phone}/>
                         <label style={padding}>Code of Reseller or Company</label>
-                        <input type="text" onChange={handleResellerCode} value={resellerCode}/>
+                        <input type="text" onChange={handleResellerID} value={resellerID}/>
                 </div>
                 
                 <div className="form-control" style={center}>

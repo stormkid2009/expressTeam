@@ -42,6 +42,7 @@ export default class Credit extends Component {
     }
 
     handleClick =()=>{
+        //send post request to update the credit of resellers
         axios.post('http://localhost:5000/resellers/update/' + this.state.resellerID,{credit:this.state.credit})
         .then(res => console.log(res.data))
         .catch(err => console.log(err))

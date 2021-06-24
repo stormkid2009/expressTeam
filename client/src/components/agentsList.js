@@ -18,6 +18,7 @@ export default class AgentsList extends Component {
     }
     
     componentDidMount() {
+        //get all agents from data base
         axios.get("http://localhost:5000/agents/")
         .then(response => this.setState({agents:response.data}))
         .catch(err => console.log(err))

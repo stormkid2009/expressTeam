@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { header,flex, padding, danger } from './modules/styles';
-
+import unique from './modules/key'
+//declare a function accepts props from parent
 const Reseller = props => (
     <tr>
         
@@ -38,7 +39,7 @@ export default class ResellersList extends Component {
     }
     listOfResellers(){
         return this.state.resellers.map(current =>{
-            return <Reseller reseller={current}/>
+            return <Reseller reseller={current} key={unique()} />
         })
     }
     render() {
@@ -46,22 +47,17 @@ export default class ResellersList extends Component {
         return (
             <div>
                 <h5 style={header}>list of current resellers</h5>
-                
                     <div >
-                        
                         <table className="table table-hover table-dark table-bordered ">
                             <thead className="table-secondary">
                                 <tr >
-                                    
                                     <th>Reseller Name</th>
                                     <th>Reseller address</th>
                                     <th>Reseller phone number</th>
                                     <th>Reseller ID</th>
                                     <th>Reseller Credit</th>
-
                                 </tr>
                             </thead>
-                            
                             <tbody>
                                 {this.listOfResellers()}
                             </tbody>

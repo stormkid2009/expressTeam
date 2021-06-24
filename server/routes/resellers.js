@@ -25,18 +25,18 @@ router.route('/add').post((req,res)=>{
         phone,
         credit
     })
-
+    //save the newReseller object
     newReseller.save()
     .then(()=> res.json("new Reseller has been added successfully!"))
     .catch(err => res.status(400).json("Error : " + err))
 });
-
+//setup the end point to delete a reseller
 router.route('/:id').delete((req,res)=>{
     Reseller.findByIdAndDelete(req.params.id)
     .then(() => res.json("Reseller has been removed successfuly"))
     .catch(err => res.status(400).json("Error: " + err))
 });
-
+//setup the end point of edit the credit
 router.route('/update/:id').post((req,res)=>{
     Reseller.findById(req.params.id)
     .then(reseller =>{

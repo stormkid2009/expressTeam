@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import axios from 'axios';
 import Order from './order';
 import { padding ,header} from './modules/styles';
+import unique from './modules/key'
 
 
 
@@ -40,7 +41,7 @@ export default class OrdersList extends Component{
             status:this.state.status
             
         }
-        
+        //send request to edit the status of the order
         axios.post("http://localhost:5000/orders/status/" + this.state.id,order)
         .then(res => console.log(res.data))
         .catch(err => console.log(err))
@@ -59,30 +60,30 @@ export default class OrdersList extends Component{
 
     deliveredList () {
         return this.state.orders.filter(currentOrder => currentOrder.status === "delivered").map(currentOrder =>{
-            return <Order order={currentOrder} />
+            return <Order order={currentOrder} key={unique()} />
         })
     }
     refusedList () {
         return this.state.orders.filter(currentOrder => currentOrder.status === "refused").map(currentOrder =>{
-            return <Order order={currentOrder} />
+            return <Order order={currentOrder} key={unique()} />
         })
     }
 
     rejectedList () {
         return this.state.orders.filter(currentOrder => currentOrder.status === "rejected").map(currentOrder =>{
-            return <Order order={currentOrder} />
+            return <Order order={currentOrder} key={unique()} />
         })
     }
 
     pendingList () {
         return this.state.orders.filter(currentOrder => currentOrder.status === "pending").map(currentOrder =>{
-            return <Order order={currentOrder} />
+            return <Order order={currentOrder} key={unique()} />
         })
     }
 
     chargedList () {
         return this.state.orders.filter(currentOrder => currentOrder.status === "charged").map(currentOrder =>{
-            return <Order order={currentOrder} />
+            return <Order order={currentOrder} key={unique()}/>
         })
     }
     render(){

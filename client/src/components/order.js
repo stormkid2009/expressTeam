@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+//declare a function which accepts props holding the order object
 
 export default function Order(props) {
     return (

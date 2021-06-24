@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
+//declare our schema
 const orderSchema = new Schema({
     resellerID:{type: String, required: true},
     item :{type: String, required: true},
@@ -17,5 +18,6 @@ const orderSchema = new Schema({
 },{
     timestamps: true,
 });
+//compile our schema into mongoose.model
 const Order = mongoose.model('Order',orderSchema);
 module.exports = Order;

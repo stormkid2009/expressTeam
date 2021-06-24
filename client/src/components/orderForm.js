@@ -104,6 +104,7 @@ export default class Order extends Component {
             notes:this.state.notes
             
         }
+        //send post request to add the new order
         axios.post('http://localhost:5000/orders/add', order)
         .then(res => console.log(res.data))
         window.location = '/';

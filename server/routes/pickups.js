@@ -1,13 +1,13 @@
 const router = require('express').Router();
 let Pickup = require('../models/pickup.model');
 
-//setup endpoint for get request:
+//setup endpoint for get all the pickups:
 router.route('/').get((req,res)=>{
     Pickup.find()
     .then( pickups => res.json(pickups))
     .catch( err => res.status(400).json("Error" + err))
 })
-
+//setup the end point of adding new pickup
 router.route('/add').post((req,res)=>{
     //assign pickup body to variables
     
@@ -35,7 +35,7 @@ router.route('/add').post((req,res)=>{
         order6
         
     })
-
+    //save the newPickup object
     newPickup.save()
     .then(()=> res.json("new pickup has been added successfully!"))
     .catch(err => res.status(400).json("Error : " + err))

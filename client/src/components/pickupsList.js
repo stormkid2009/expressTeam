@@ -7,6 +7,7 @@ import Order from './order';
 import {flex} from './modules/styles';
 import unique from './modules/key';
 //unique will generate key and we can implement this to all our list over the application
+//we already made a function unique as a module
 
 
 
@@ -39,6 +40,7 @@ export default class PickupsList extends Component {
     }
 
     pickupsList(){
+        //Date.parse to change the date into number of milliseconds from january 1970
         return this.state.pickups.filter(current => Date.parse(current.date) > Date.parse(this.state.date)).map(current => { return <Pickup pickup = {current} key={unique()}/> ;})
         
     }
@@ -89,10 +91,7 @@ export default class PickupsList extends Component {
         
          
     }
-    test=()=>{
-        let data = this.state.orders.map(current => current.date);
-        console.log(data);
-    }
+    
     render() {
         return (
             <div>

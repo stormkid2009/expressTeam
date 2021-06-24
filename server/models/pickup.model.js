@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
+//declare our schema
 const pickupSchema = new Schema({
     
     date:{type: Date, required: true},
@@ -16,5 +17,6 @@ const pickupSchema = new Schema({
 },{
     timestamps: true,
 });
+//compile our schema into mongoose.model
 const Pickup = mongoose.model('Pickup',pickupSchema);
 module.exports = Pickup;

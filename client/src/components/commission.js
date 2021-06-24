@@ -19,6 +19,7 @@ export default class Comission extends Component {
         this.handleList = this.handleList.bind(this);
     }
     componentDidMount(){
+        //get all the orders from data base
         axios.get('http://localhost:5000/orders/')
         .then(res => this.setState({orders:res.data}))
         .catch(err => console.log(err))
@@ -47,6 +48,7 @@ export default class Comission extends Component {
     
     handleChange =()=>{
         const {status,id} = this.state;
+        //send request to update the agent status
         axios.post('http://localhost:5000/agents/update/' + id,{status:status})
         .then(res => console.log(res.data))
         .catch(err => console.log(err))

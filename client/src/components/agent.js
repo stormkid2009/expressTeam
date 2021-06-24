@@ -1,5 +1,5 @@
 import React from 'react';
-
+//function which accepts props from the parent
  const Agent = props =>(
     <tr>
         

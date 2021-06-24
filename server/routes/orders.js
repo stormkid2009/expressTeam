@@ -1,13 +1,13 @@
 const router = require('express').Router();
 let Order = require('../models/order.model');
 
-//setup endpoint for get request:
+//setup endpoint for get request: which get all the documents in that collection
 router.route('/').get((req,res)=>{
     Order.find()
     .then( orders => res.json(orders))
     .catch( err => res.status(400).json("Error" + err))
 })
-
+//setup or define the end point to add new order
 router.route('/add').post((req,res)=>{
     //assign request body to variables
     const resellerID = req.body.resellerID;
@@ -38,7 +38,7 @@ router.route('/add').post((req,res)=>{
         status,
         notes
     })
-
+    //save the newOrder object and return errors if fails
     newOrder.save()
     .then(()=> res.json(" new Order has been added successfully!"))
     .catch(err => res.status(400).json("Error : " + err))
@@ -58,7 +58,7 @@ router.route('/:id').delete((req,res) => {
     .catch(err => res.status(400).json('Error :' + err))
 });
 
-//setup route to update pickup :
+//setup route to update the date of pickup :
 router.route('/date/:id').post((req,res) => {
     Order.findById(req.params.id)
     .then(order => {
@@ -70,7 +70,7 @@ router.route('/date/:id').post((req,res) => {
     })
     .catch(err => res.status(400).json('Error :' + err))
 });
-
+//setup end point to update agentID
 router.route('/agentID/:id').post((req,res) => {
     Order.findById(req.params.id)
     .then(order => {
@@ -84,7 +84,7 @@ router.route('/agentID/:id').post((req,res) => {
     })
     .catch(err => res.status(400).json('Error :' + err))
 });
-
+//setup the end point to update status of the order
 router.route('/status/:id').post((req,res) => {
     Order.findById(req.params.id)
     .then(order => {

@@ -37,7 +37,7 @@ export default class Agent extends Component {
     }
 
     handleSubmit = () =>{
-        
+        //declare agent object that will hold body params
         const agent = {
             name:this.state.name,
             phone:this.state.phone,
@@ -45,9 +45,10 @@ export default class Agent extends Component {
             status:this.state.status,
             
         }
+        //send post request to DB with agent object as body
         axios.post('http://localhost:5000/agents/add', agent)
         .then(res => console.log(res.data));
-
+        //return to the home page
         window.location = '/';
 
     }
@@ -56,14 +57,11 @@ export default class Agent extends Component {
         const {id} = this.state;
         return (
             <div>
-                        
-                
                 <div className="form-control" style={{
                     padding:"10px"
                 }}>
                     <h4 style={header}>Register new Agent down below</h4>
                 </div>
-                
                 <div className="form-group">
                     <div className="form-control">
                         <label style={padding}>Agent full name</label>

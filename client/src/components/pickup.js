@@ -1,5 +1,5 @@
 import React from 'react';
-
+//declare a function which accepts props from parent component
 function Pickup(props) {
     return(
         <tr>
